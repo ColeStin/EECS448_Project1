@@ -1,3 +1,4 @@
+var target = '';
 function hoverOverId(id){
     $("#"+id).css("border-color", "red");
     $("#"+id).css("border-style", "solid");
@@ -8,8 +9,12 @@ function mouseOutOfBox(id){
 }
 
 function mouseClick(id){
-    console.log("here");
+    if(target!=''){
+        $("#"+target).css("background-color", "blue");
+    }
+    console.log("setting target block");
     $("#"+id).css("background-color", "orange");
+    target = id;
 }
 
 $(document).ready(function(){
@@ -31,3 +36,5 @@ $(document).ready(function(){
     }
     console.log("ready")
 });
+
+
