@@ -15,6 +15,8 @@ function mouseOutOfBox(id){
 
 function mouseClick(id){
     var posType = getSpace(id);
+    $("#player1Fire").removeClass("btn-secondary");
+    $("#player1Fire").addClass("btn-danger");
     if(posType == "empty"){
         console.log("previous target: "+ target);
         if(target != undefined){
