@@ -15,10 +15,12 @@ function mouseOutOfBox(id){
 
 function mouseClick(id){
     var posType = getSpace(id);
-    $("#player1Fire").removeClass("btn-secondary");
-    $("#player1Fire").addClass("btn-danger");
-    if(posType == "empty"){
+    $("#player1Fire").removeClass("btn-danger");
+    $("#player2Fire").removeClass("btn-danger");
+    if(posType == "empty_player1"){
         console.log("previous target: "+ target);
+        // $("#player1Fire").removeClass("btn-secondary");
+        $("#player1Fire").addClass("btn-danger");
         if(target != undefined){
             console.log("changing previous space");
             $("#"+target).css("background-image", 'url("wave.jpg")');
@@ -28,6 +30,22 @@ function mouseClick(id){
         $("#"+id).css("background-image", "url('target.png')");
         
     }
+    else{
+        console.log("previous target: "+ target);
+        // $("#player2Fire").removeClass("btn-secondary");
+        $("#player2Fire").addClass("btn-danger");
+        if(target != undefined){
+            console.log("changing previous space");
+            $("#"+target).css("background-image", 'url("wave.jpg")');
+        }
+        console.log("setting target block: "+ id);
+        target = id;
+        $("#"+id).css("background-image", "url('target.png')");
+    }
+    
+}
+
+function fireRound(){
     
 }
 
@@ -60,7 +78,7 @@ function generatePlayer1Targeting(){
     }
     for(var x =0; x<xsize;x++){
         for(var y =0; y<ysize; y++){
-            player1TargetArray[x][y] = "empty";
+            player1TargetArray[x][y] = "empty_player1";
         }
     }
 }
@@ -84,7 +102,7 @@ function generatePlayer2Targeting(){
     }
     for(var x =0; x<xsize;x++){
         for(var y =0; y<ysize; y++){
-            player2TargetArray[x][y] = "empty";
+            player2TargetArray[x][y] = "empty_player2";
         }
     }
 }
