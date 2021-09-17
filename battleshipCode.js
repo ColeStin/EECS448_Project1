@@ -117,6 +117,30 @@ function generatePlayer2Targeting(){
 }
 
 function generatePlayer1Display(){
+    // for(var x =1; x<xsize*ysize;x++){
+    //     var innerHTML =`
+    //         <div ">
+
+    //         </div>
+    //         `;
+    //         $("#player1Display").append(innerHTML);
+    // }
+    for(var x =0; x<xsize;x++){
+        var html = `
+        <div id='player1display_row`+x+`' style='padding:px'>
+        </div>`
+        $("#player1Display").append(html);
+        for(var y =0; y<ysize; y++){
+            player1TargetArray[y] = new Array(ysize);
+            var letter = (y+10).toString(36);
+            var innerHTML =`
+            <div id='player1display_`+x+letter+`' class='dropBoxShip' ondrop="dragDrop(event)" ondragover="dragOver(event)">
+
+            </div>
+            `;
+            $("#player1display_row"+x).append(innerHTML);
+        }
+    }
 
 }
 
@@ -160,13 +184,14 @@ battleshipsArray.forEach(battleships => battleships.addEventListener('mousedown'
   currentShipName = e.target.id
 }))
 
-function dragStart() {
-  currentShip = this
+function dragStart(ev) {
+  currentShipID = ev.srcElement.id;
+  ev.dataTransfer.setData("id", currentShipID);
 }
 
 function dragOver(ev) {
     ev.preventDefault();
-  console.log('dragOver')
+  //console.log('dragOver')
 }
 
 function dragEnter() {
@@ -179,6 +204,9 @@ function dragLeave() {
 
 function dragDrop(ev) {
     ev.preventDefault();
+    var data = ev.dataTransfer.getData("id");
+    console.log(data);
+    ev.target.appendChild(document.getElementById(data));
   console.log('dragDrop')
 }
 
