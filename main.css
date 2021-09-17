@@ -1,4 +1,4 @@
-.selectionBox{ 
+.selectionBox{
     color:white;
     border-style: solid;
     border-color: lightblue;
@@ -9,4 +9,16 @@
     text-align: center;
     background-image: url("wave.jpg");
     background-size: cover;
+}
+
+.player-one-pieces {
+  width: 600px;
+  height: 600px;
+  background-color: lightblue;
+}
+
+.player-two-pieces {
+  width: 600px;
+  height: 600px;
+  background-color: lightblue;
 }

@@ -6,10 +6,11 @@
 
     <body class='container shadow-lg col-sm-11 p-3 mb-5 bg-white rounded'>
 
-        
-        <div class='row container'>
-            <div class='text-center'>
-                <img src='battleship_logo.png' class='rounded'alt="Battleship!">
+        <div class='container'>
+            <div class='row'>
+                <div class='span4'></div>
+                    <div class='span4'><img class='center-block' src='battleship_logo.png' alt="Battleship!"></div>
+                <div class='span4'></div>
             </div>
         </div>
         <p>*How to play goes in this section*</p>
@@ -22,7 +23,7 @@
                         </div>
                         <button id='player1Fire' class='btn btn-secondary' style="align-items: center; justify-content: center; display: flex;">Fire!</button>
                         <div id='assistPlayer1'>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -33,16 +34,28 @@
                         </div>
                         <button id='player2Fire' class='btn btn-secondary' style="align-items: center; justify-content: center; display: flex;">Fire!</button>
                         <div id='assistPlayer2'>
-                           
+
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+        <div class='row'>
+            <div class='col-sm-6'>
+                <div class='player-one-pieces'>
+
+                </div>
+            </div>
+            <div class='col-sm-6'>
+                <div class='player-two-pieces'><div>
+
                 </div>
             </div>
         </div>
 
     </body>
 
-    <script src='jquery.js'></script> 
+    <script src='jquery.js'></script>
     <script src='battleshipCode.js'></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel='stylesheet' href='main.css'>
