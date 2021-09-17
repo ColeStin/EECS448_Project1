@@ -25,6 +25,13 @@
 
 }
 
+.dropBoxShip{
+  height: 50px;
+  width: 50px;
+  text-align: center;
+  background-color: #ff0000;
+}
+
 .player-one-pieces {
   margin: 10px;
   width: 600px;
@@ -87,6 +94,7 @@
   background-color: purple;
   margin: 30px;
   display: flex;
+  
 }
 
 .sixXoneShip {
@@ -95,4 +103,53 @@
   background-color: blue;
   margin: 30px;
   display: flex;
+}
+
+.oneByShip{
+  background-image: url("topOfBattleship.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-size: contain;
+  background-size: cover;
+}
+.twoByShip{
+  background-image: url("topOfBattleship.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-size: contain;
+  background-size: cover;
+}
+.threeByShip{
+  background-image: url("topOfBattleship.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-size: contain;
+  background-size: cover;
+}
+.fourByShip{
+  background-image: url("topOfBattleship.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-size: contain;
+  background-size: cover;
+}
+.fiveByShip{
+  background-image: url("topOfBattleship.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-size: contain;
+  background-size: cover;
+}
+.sixByShip{
+  background-image: url("topOfBattleship.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-size: contain;
+  background-size: cover;
 }

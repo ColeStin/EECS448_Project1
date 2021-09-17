@@ -164,7 +164,8 @@ function dragStart() {
   currentShip = this
 }
 
-function dragOver() {
+function dragOver(ev) {
+    ev.preventDefault();
   console.log('dragOver')
 }
 
@@ -176,7 +177,8 @@ function dragLeave() {
   console.log('dragLeave')
 }
 
-function dragDrop() {
+function dragDrop(ev) {
+    ev.preventDefault();
   console.log('dragDrop')
 }
 
