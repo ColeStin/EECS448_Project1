@@ -8,7 +8,7 @@ const battleshipsArray = document.querySelectorAll('.battleships')
 const oneXoneShip = document.querySelector('.oneXoneShip')
 const twoXoneShip = document.querySelector('.twoXoneShip')
 const threeXoneShip = document.querySelector('.threeXoneShip')
-const fourXoneShip = document.querySelector('fourXoneShip')
+const fourXoneShip = document.querySelector('.fourXoneShip')
 const fiveXoneShip = document.querySelector('.fiveXoneShip')
 const sixXoneShip = document.querySelector('.sixXoneShip')
 
@@ -18,7 +18,7 @@ function hoverOverId(id){
 }
 
 function mouseOutOfBox(id){
-    $("#"+id).css("border-color", "lightblue");
+    $("#"+id).css("border-color", "#ffffff00");
 }
 
 function mouseClick(id){
@@ -31,11 +31,11 @@ function mouseClick(id){
         $("#player1Fire").addClass("btn-danger");
         if(target != undefined){
             console.log("changing previous space");
-            $("#"+target).css("background-image", 'url("wave.jpg")');
+            $("#"+target).css("background-color", "#ffffff00");
         }
         console.log("setting target block: "+ id);
         target = id;
-        $("#"+id).css("background-image", "url('target.png')");
+        $("#"+id).css("background-color", "red");
 
     }
     else{
@@ -44,11 +44,11 @@ function mouseClick(id){
         $("#player2Fire").addClass("btn-danger");
         if(target != undefined){
             console.log("changing previous space");
-            $("#"+target).css("background-image", 'url("wave.jpg")');
+            $("#"+target).css("background-color", "#ffffff00");
         }
         console.log("setting target block: "+ id);
         target = id;
-        $("#"+id).css("background-image", "url('target.png')");
+        $("#"+id).css("background-color", "red");
     }
 
 }
@@ -61,6 +61,7 @@ $(document).ready(function(){
 
     generatePlayer1Targeting();
     generatePlayer2Targeting();
+    generatePlayer1Display();
     //need to fill in the array with a bucnh of "empty" slots so the targeting knows, specifications: hit = red, miss = gray, empty = blue
     // hit is a specified to show that when fired, there was an enemy ship that was hit, miss is just a fire with a miss.
     console.log("ready")
@@ -113,6 +114,14 @@ function generatePlayer2Targeting(){
             player2TargetArray[x][y] = "empty_player2";
         }
     }
+}
+
+function generatePlayer1Display(){
+
+}
+
+function generatePlayer2Display(){
+
 }
 
 function getXCoordinate(){
