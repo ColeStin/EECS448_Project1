@@ -22,3 +22,61 @@
   height: 600px;
   background-color: lightblue;
 }
+
+.remove-padding {
+  padding-left:0px;
+  padding-right:0px;
+}
+
+.battleships div {
+  width: 60px;
+  height: 60px;
+}
+
+.oneXoneShip {
+  width: 60px;
+  height: 60px;
+  background-color: yellow;
+  margin: 30px;
+  display: flex;
+}
+
+.twoXoneShip {
+  width: 120px;
+  height: 60px;
+  background-color: orange;
+  margin: 30px;
+  display: flex;
+}
+
+.threeXoneShip {
+  width: 180px;
+  height: 60px;
+  background-color: red;
+  margin: 30px;
+  display: flex;
+}
+
+.fourXoneShip {
+  width: 240px;
+  height: 60px;
+  background-color: pink;
+  margin: 30px;
+  display: flex;
+}
+
+.fiveXoneShip {
+  width: 300px;
+  height: 60px;
+  background-color: purple;
+  margin: 30px;
+  display: flex;
+}
+
+.sixXoneShip {
+  width: 360px;
+  height: 60px;
+  background-color: blue;
+  margin: 30px;
+  display: flex;
+}
