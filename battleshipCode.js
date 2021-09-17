@@ -4,6 +4,14 @@ var player1TargetArray;
 var player2TargetArray;
 var xsize = 9;
 var ysize = 10;
+const battleshipsArray = document.querySelectorAll('.battleships')
+const oneXoneShip = document.querySelector('.oneXoneShip')
+const twoXoneShip = document.querySelector('.twoXoneShip')
+const threeXoneShip = document.querySelector('.threeXoneShip')
+const fourXoneShip = document.querySelector('fourXoneShip')
+const fiveXoneShip = document.querySelector('.fiveXoneShip')
+const sixXoneShip = document.querySelector('.sixXoneShip')
+
 function hoverOverId(id){
     $("#"+id).css("border-color", "red");
     $("#"+id).css("border-style", "solid");
@@ -28,7 +36,7 @@ function mouseClick(id){
         console.log("setting target block: "+ id);
         target = id;
         $("#"+id).css("background-image", "url('target.png')");
-        
+
     }
     else{
         console.log("previous target: "+ target);
@@ -42,11 +50,11 @@ function mouseClick(id){
         target = id;
         $("#"+id).css("background-image", "url('target.png')");
     }
-    
+
 }
 
 function fireRound(){
-    
+
 }
 
 $(document).ready(function(){
@@ -70,7 +78,7 @@ function generatePlayer1Targeting(){
             var letter = (y+10).toString(36);
             var innerHTML =`
             <div id='player1_`+x+letter+`' class='selectionBox' onmouseover="hoverOverId('player1_`+x+letter+`')" onmouseout="mouseOutOfBox('player1_`+x+letter+`')" onclick="mouseClick('player1_`+x+letter+`')">
-            
+
             </div>
             `;
             $("#player1_row"+x).append(innerHTML);
@@ -94,7 +102,7 @@ function generatePlayer2Targeting(){
             var letter = (y+10).toString(36);
             var innerHTML =`
             <div id='player2_`+x+letter+`' class='selectionBox' onmouseover="hoverOverId('player2_`+x+letter+`')" onmouseout="mouseOutOfBox('player2_`+x+letter+`')" onclick="mouseClick('player2_`+x+letter+`')">
-            
+
             </div>
             `;
             $("#player2_row"+x).append(innerHTML);
@@ -125,6 +133,48 @@ function getSpace(id){
     }
 }
 
+  battleshipsArray.forEach(battleships => battleships.addEventListener('dragstart', dragStart))
+  // player1TargetArray.forEach(/**target object**/ => /**target object**/.addEventListener('dragstart', dragStart))
+  // player1TargetArray.forEach(/**target object**/ => /**target object**/.addEventListener('dragover', dragOver))
+  // player1TargetArray.forEach(/**target object**/ => /**target object**/.addEventListener('dragenter', dragEnter))
+  // player1TargetArray.forEach(/**target object**/ => /**target object**/.addEventListener('dragleave', dragLeave))
+  // player1TargetArray.forEach(/**target object**/ => /**target object**/.addEventListener('drop', dragDrop))
+  // player1TargetArray.forEach(/**target object**/ => /**target object**/.addEventListener('dragend', dragEnd))
+
+
+let currentShipName
+let currentShip
+
+battleshipsArray.forEach(battleships => battleships.addEventListener('mousedown', (e) => {
+  //tells us what ship the player is clicking and what tile of the ship
+  //ex: if the player is clicking the first tile of the fiveXoneShip it would return fiveXone-0
+  currentShipName = e.target.id
+}))
+
+function dragStart() {
+  currentShip = this
+}
+
+function dragOver() {
+  console.log('dragOver')
+}
+
+function dragEnter() {
+  console.log('dragEnter')
+}
+
+function dragLeave() {
+  console.log('dragLeave')
+}
+
+function dragDrop() {
+  console.log('dragDrop')
+}
+
+function dragEnd() {
+  console.log('dragEnd')
+}
+
 //needed funcitons->
 /*
 fire function: takes in and updates array for whatever the target was for the player
@@ -139,4 +189,3 @@ battleship logo
 gray square for miss
 
 */
-
