@@ -2,6 +2,8 @@ var turn=0;
 var target;
 var player1TargetArray;
 var player2TargetArray;
+var player1DisplayArray;
+var player2DisplayArray;
 var xsize = 9;
 var ysize = 10;
 const battleshipsArray = document.querySelectorAll('.battleships')
@@ -11,6 +13,8 @@ const threeXoneShip = document.querySelector('.threeXoneShip')
 const fourXoneShip = document.querySelector('.fourXoneShip')
 const fiveXoneShip = document.querySelector('.fiveXoneShip')
 const sixXoneShip = document.querySelector('.sixXoneShip')
+const shipNameArray = ["Patrol", "Assult Ship", "Submarine", "Destroyer", "Battleship", "Aircraft Carrier"];
+
 
 function hoverOverId(id){
     $("#"+id).css("border-color", "red");
@@ -53,8 +57,9 @@ function mouseClick(id){
 
 }
 
-function fireRound(){
-
+function fireRound(player){
+console.log("fired " + player);
+$("#player1display_0a").css("background-color", "red")
 }
 
 $(document).ready(function(){
@@ -125,13 +130,14 @@ function generatePlayer1Display(){
     //         `;
     //         $("#player1Display").append(innerHTML);
     // }
+    player1DisplayArray = new Array(xsize);
     for(var x =0; x<xsize;x++){
         var html = `
-        <div id='player1display_row`+x+`' style='padding:px'>
+        <div id='player1display_row`+x+`' class='row' >
         </div>`
         $("#player1Display").append(html);
         for(var y =0; y<ysize; y++){
-            player1TargetArray[y] = new Array(ysize);
+            player1DisplayArray[y] = new Array(ysize);
             var letter = (y+10).toString(36);
             var innerHTML =`
             <div id='player1display_`+x+letter+`' class='dropBoxShip' ondrop="dragDrop(event)" ondragover="dragOver(event)">
@@ -141,7 +147,7 @@ function generatePlayer1Display(){
             $("#player1display_row"+x).append(innerHTML);
         }
     }
-
+    console.log(player1DisplayArray);
 }
 
 function generatePlayer2Display(){
@@ -182,6 +188,7 @@ battleshipsArray.forEach(battleships => battleships.addEventListener('mousedown'
   //tells us what ship the player is clicking and what tile of the ship
   //ex: if the player is clicking the first tile of the fiveXoneShip it would return fiveXone-0
   currentShipName = e.target.id
+  console.log(currentShipName);
 }))
 
 function dragStart(ev) {
@@ -204,9 +211,12 @@ function dragLeave() {
 
 function dragDrop(ev) {
     ev.preventDefault();
-    var data = ev.dataTransfer.getData("id");
-    console.log(data);
-    ev.target.appendChild(document.getElementById(data));
+    if(/*placement is good */ true){
+        var data = ev.dataTransfer.getData("id");
+        console.log(data);
+        ev.target.appendChild(document.getElementById(data));
+    }
+    
   console.log('dragDrop')
 }
 

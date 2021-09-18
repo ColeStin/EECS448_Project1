@@ -23,17 +23,15 @@
 
                             </div>
                         </div>
-                        <div class="shipBox" id = "player1Display" >
-                            <div class='dropBoxShip' ondrop="dragDrop(event)" ondragover="dragOver(event)">
-
-                            </div>
+                        <div class="shipBox container" id = "player1Display" >
+                            
                         </div>
                         
                         
                         
                     </div>
                     <div id='assistPlayer1'>
-                        <button id='player1Fire' class='btn btn-secondary' style="align-items: center; justify-content: center; display: flex;">Fire!</button>
+                        <button id='player1Fire' class='btn btn-secondary' style="align-items: center; justify-content: center; display: flex;" onclick="fireRound(1)">Fire!</button>
                     </div>
                 </div>
                 <div class='col-sm-6' id='player2Area' class='targetBox'>
@@ -49,7 +47,7 @@
                         
                     </div>
                     <div id='assistPlayer2'>
-                        <button id='player2Fire' class='btn btn-secondary' style="align-items: center; justify-content: center; display: flex;">Fire!</button>
+                        <button id='player2Fire' class='btn btn-secondary' style="align-items: center; justify-content: center; display: flex;" onclick="fireRound(2)">Fire!</button>
                     </div>
                 </div>
             </div>
