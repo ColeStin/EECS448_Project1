@@ -13,7 +13,7 @@ const threeXoneShip = document.querySelector('.threeXoneShip')
 const fourXoneShip = document.querySelector('.fourXoneShip')
 const fiveXoneShip = document.querySelector('.fiveXoneShip')
 const sixXoneShip = document.querySelector('.sixXoneShip')
-const shipNameArray = ["Patrol", "Assult Ship", "Submarine", "Destroyer", "Battleship", "Aircraft Carrier"];
+const shipNameArray = ["Patrol", "Assault Ship", "Submarine", "Destroyer", "Battleship", "Aircraft Carrier"];
 
 
 //this function will change the border color of a box in the targeting area
@@ -45,7 +45,7 @@ function mouseClick(id){
         }
         console.log("setting target block: "+ id);
         target = id;
-        $("#"+id).css("background-color", "red");
+        $("#"+id).css("background-color", "orange");
 
     }
     //second except it is for player 2
@@ -59,7 +59,7 @@ function mouseClick(id){
         }
         console.log("setting target block: "+ id);
         target = id;
-        $("#"+id).css("background-color", "red");
+        $("#"+id).css("background-color", "orange");
     }
     //if it is not empty for player1 or 2, then it will not allow for the space to be selected
 
@@ -75,6 +75,7 @@ $(document).ready(function(){
     generatePlayer1Targeting();
     generatePlayer2Targeting();
     generatePlayer1Display();
+    generatePlayer2Display();
     //need to fill in the array with a bucnh of "empty" slots so the targeting knows, specifications: hit = red, miss = gray, empty = blue
     // hit is a specified to show that when fired, there was an enemy ship that was hit, miss is just a fire with a miss.
     console.log("ready")
@@ -166,10 +167,40 @@ function generatePlayer1Display(){
             $("#player1display_row"+x).append(innerHTML);
         }
     }
+    for(var x =0; x<xsize;x++){
+        for(var y =0; y<ysize; y++){
+            player1DisplayArray[x][y] = "e";
+        }
+    }
     console.log(player1DisplayArray);
 }
 
 function generatePlayer2Display(){
+    player2DisplayArray = new Array(xsize);
+    for(var x =0; x<xsize;x++){
+        //specifies a row for 
+        var html = `
+        <div id='player2display_row`+x+`' class='row' >
+        </div>`
+        $("#player2Display").append(html);
+        console.log("append row");
+        for(var y =0; y<ysize; y++){
+            player2DisplayArray[y] = new Array(ysize);
+            var letter = (y+10).toString(36);
+            var innerHTML =`
+            <div id='player2display_`+x+letter+`' class='dropBoxShip' ondrop="dragDrop(event, 'player2display_`+x+letter+`')" ondragover="dragOver(event)">
+
+            </div>
+            `;
+            $("#player2display_row"+x).append(innerHTML);
+        }
+    }
+    for(var x =0; x<xsize;x++){
+        for(var y =0; y<ysize; y++){
+            player2DisplayArray[x][y] = "e";
+        }
+    }
+    console.log(player2DisplayArray);
 
 }
 
@@ -178,6 +209,7 @@ function generatePlayer2Display(){
 //it will depend on if a ship is already there, or if the ship goes out of bounds
 function getValidPlacement(shipType, placeSpace){
     //checks array at location
+    console.log(placeSpace);
     var x = getXCoordinate(placeSpace);
     var y = getYCoordinate(placeSpace);
     return true;
@@ -262,8 +294,8 @@ function dragLeave() {
 //it will process where the ship is at and if it is a valid place to drop the ship.
 function dragDrop(ev, id) {
     ev.preventDefault();
-    console.log(id);
     var typeOfShip = ev.dataTransfer.getData("id"); //gets type of ship to pass to valid placement function to check and see if it is a valid placement
+    console.log("here1")
     if(getValidPlacement(typeOfShip, id)){
         //make sure to update arrays based on how long length of ship is and such, can hard code or do dynamic if needed
         console.log(typeOfShip);

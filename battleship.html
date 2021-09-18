@@ -41,7 +41,7 @@
 
                             </div>  
                         </div>
-                        <div class="shipBox" id = "player2Display" ondrop="dragDrop(event)" ondragover="dragOver(event)">
+                        <div class="shipBox container" id = "player2Display">
                             
                         </div>
                         
@@ -55,49 +55,76 @@
         <div class='row g-0'>
             <div class='col-sm-6 remove-padding'>
                 <div class='player-one-pieces'>
-                    <div class="battleships oneByShip oneXoneShip" draggable='true' id='oneXoneShip'>
-                        <div id="oneXoneShip-0" ondragstart="dragStart(event)"></div>
+                    <div class="battleships oneByShip oneXoneShip" draggable='true' id='1Patrol'>
+                        <div id="1Patrol-0" ondragstart="dragStart(event)"></div>
                     </div>
-                    <div class="battleships twoByShip twoXoneShip" draggable='true' id="twoXoneShip">
-                        <div id="twoXoneShip-0"></div>
-                        <div id="twoXoneShip-1"></div>
+                    <div class="battleships twoByShip twoXoneShip" draggable='true' id="1Assault">
+                        <div id="1Assault-0"></div>
+                        <div id="1Assault-1"></div>
                     </div>
-                    <div class="battleships threeByShip threeXoneShip" draggable='true' id="threeXoneShip">
-                        <div id="threeXoneShip-0"></div>
-                        <div id="threeXoneShip-1"></div>
-                        <div id="threeXoneShip-2"></div>
+                    <div class="battleships threeByShip threeXoneShip" draggable='true' id="1Sub">
+                        <div id="1Sub-0"></div>
+                        <div id="1Sub-1"></div>
+                        <div id="1Sub-2"></div>
                     </div>
-                    <div class="battleships fourByShip fourXoneShip" draggable='true' id="fourXoneShip">
-                        <div id="fourXoneShip-0"></div>
-                        <div id="fourXoneShip-1"></div>
-                        <div id="fourXoneShip-2"></div>
-                        <div id="fourXoneShip-3"></div>
+                    <div class="battleships fourByShip fourXoneShip" draggable='true' id="1Destroy">
+                        <div id="1Destroy-0"></div>
+                        <div id="1Destroy-1"></div>
+                        <div id="1Destroy-2"></div>
+                        <div id="1Destroy-3"></div>
                     </div>
-                    <div class="battleships fiveByShip fiveXoneShip" draggable='true' id="fiveXoneShip">
-                        <div id="fiveXoneShip-0"></div>
-                        <div id="fiveXoneShip-1"></div>
-                        <div id="fiveXoneShip-2"></div>
-                        <div id="fiveXoneShip-3"></div>
-                        <div id="fiveXoneShip-4"></div>
+                    <div class="battleships fiveByShip fiveXoneShip" draggable='true' id="1Battle">
+                        <div id="1Destroy-0"></div>
+                        <div id="1Destroy-1"></div>
+                        <div id="1Destroy-2"></div>
+                        <div id="1Destroy-3"></div>
+                        <div id="1Destroy-4"></div>
                     </div>
-                    <div class="battleships sixByShip sixXoneShip" draggable='true' id="sixXoneShip">
-                        <div id="sixXoneShip-0"></div>
-                        <div id="sixXoneShip-1"></div>
-                        <div id="sixXoneShip-2"></div>
-                        <div id="sixXoneShip-3"></div>
-                        <div id="sixXoneShip-4"></div>
-                        <div id="sixXoneShip-5"></div>
+                    <div class="battleships sixByShip sixXoneShip" draggable='true' id="1Carrier">
+                        <div id="1Carrier-0"></div>
+                        <div id="1Carrier-1"></div>
+                        <div id="1Carrier-2"></div>
+                        <div id="1Carrier-3"></div>
+                        <div id="1Carrier-4"></div>
+                        <div id="1Carrier-5"></div>
                     </div>
                 </div>
             </div>
             <div class='col-sm-6 remove-padding'>
                 <div class='player-two-pieces'>
-                    <div class="battleships oneByShip oneXoneShip" draggable='true'><div id="oneXoneShip-0"></div></div>
-                    <div class="battleships twoByShip twoXoneShip" draggable='true'><div id="twoXoneShip-0"></div><div id="twoXoneShip-1"></div></div>
-                    <div class="battleships threeByShip threeXoneShip" draggable='true'><div id="threeXoneShip-0"></div><div id="threeXoneShip-1"></div><div id="threeXoneShip-2"></div></div>
-                    <div class="battleships fourByShip fourXoneShip" draggable='true'><div id="fourXoneShip-0"></div><div id="fourXoneShip-1"></div><div id="fourXoneShip-2"></div><div id="fourXoneShip-3"></div></div>
-                    <div class="battleships fiveByShip randomShip fiveXoneShip" draggable='true'><div id="fiveXoneShip-0"></div><div id="fiveXoneShip-1"></div><div id="fiveXoneShip-2"></div><div id="fiveXoneShip-3"></div><div id="fiveXoneShip-4"></div></div>
-                    <div class="battleships sixByShip sixXoneShip" draggable='true'><div id="sixXoneShip-0"></div><div id="sixXoneShip-1"></div><div id="sixXoneShip-2"></div><div id="sixXoneShip-3"></div><div id="sixXoneShip-4"></div><div id="sixXoneShip-5"></div></div>
+                    <div class="battleships oneByShip oneXoneShip" draggable='true' id='2Patrol'>
+                        <div id="2Patrol-0"></div>
+                    </div>
+                    <div class="battleships twoByShip twoXoneShip" draggable='true' id='2Assault'>
+                        <div id="2Assault-0"></div>
+                        <div id="2Assault-1"></div>
+                    </div>
+                    <div class="battleships threeByShip threeXoneShip" draggable='true' id='2Sub'>
+                        <div id="2Sub-0"></div>
+                        <div id="2Sub-1"></div>
+                        <div id="2Sub-2"></div>
+                    </div>
+                    <div class="battleships fourByShip fourXoneShip" draggable='true' id='2Destroy'>
+                        <div id="2Destroy-0"></div>
+                        <div id="2Destroy-1"></div>
+                        <div id="2Destroy-2"></div>
+                        <div id="2Destroy-3"></div>
+                    </div>
+                    <div class="battleships fiveByShip fiveXoneShip" draggable='true' id='2Battle'>
+                        <div id="2Battle-0"></div>
+                        <div id="2Battle-1"></div>
+                        <div id="2Battle-2"></div>
+                        <div id="2Battle-3"></div>
+                        <div id="2Battle-4"></div>
+                    </div>
+                    <div class="battleships sixByShip sixXoneShip" draggable='true' id='2Carrier'>
+                        <div id="2Carrier-0"></div>
+                        <div id="2Carrier-1"></div>
+                        <div id="2Carrier-2"></div>
+                        <div id="2Carrier-3"></div>
+                        <div id="2Carrier-4"></div>
+                        <div id="2Carrier-5"></div>
+                    </div>
                 </div>
             </div>
         </div>
