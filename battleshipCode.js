@@ -140,7 +140,7 @@ function generatePlayer1Display(){
             player1DisplayArray[y] = new Array(ysize);
             var letter = (y+10).toString(36);
             var innerHTML =`
-            <div id='player1display_`+x+letter+`' class='dropBoxShip' ondrop="dragDrop(event)" ondragover="dragOver(event)">
+            <div id='player1display_`+x+letter+`' class='dropBoxShip' ondrop="dragDrop(event, 'player1display_`+x+letter+`')" ondragover="dragOver(event)">
 
             </div>
             `;
@@ -150,20 +150,39 @@ function generatePlayer1Display(){
     console.log(player1DisplayArray);
 }
 
+//Passes ship type and placeSpace (where the user is attempting to place a ship)
+//this function will return true or false as to see if the user can place a ship there
+//it will depend on if a ship is already there, or if the ship goes out of bounds
+function getValidPlacement(shipType, placeSpace){
+    //checks array at location
+    var x = getXCoordinate(placeSpace);
+    var y = getYCoordinate(placeSpace);
+    return true;
+}
+
 function generatePlayer2Display(){
 
 }
 
-function getXCoordinate(){
 
+//will pass an id string, only returns 1 number
+function getXCoordinate(id){
+    var underscore = id.indexOf("_") +1;
+    var x = id.substring(underscore,underscore+1);
+    console.log("X: " + x);
+    return x;
 }
-function getYCoordinate(){
+function getYCoordinate(id){
+    var underscore = id.indexOf("_") + 2;
+    var y = (id.charCodeAt(underscore)-97);
+    console.log("Y: " + y);
+    return y;
 
 }
 function getSpace(id){
     var player = id.substring(6,7);
-    var x = id.substring(8,9);
-    var y = id.charCodeAt(9)-97;
+    var x = getXCoordinate(id);
+    var y = getYCoordinate(id);
     if(player == 1){
         return (player1TargetArray[x][y]);
     }
@@ -209,12 +228,14 @@ function dragLeave() {
   console.log('dragLeave')
 }
 
-function dragDrop(ev) {
+function dragDrop(ev, id) {
     ev.preventDefault();
-    if(/*placement is good */ true){
-        var data = ev.dataTransfer.getData("id");
-        console.log(data);
-        ev.target.appendChild(document.getElementById(data));
+    console.log(id);
+    var typeOfShip = ev.dataTransfer.getData("id");
+    if(getValidPlacement(typeOfShip, id)){
+        //make sure to update arrays based on how long length of ship is and such, can hard code or do dynamic if needed
+        console.log(typeOfShip);
+        ev.target.appendChild(document.getElementById(typeOfShip));
     }
     
   console.log('dragDrop')
