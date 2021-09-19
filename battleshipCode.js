@@ -70,7 +70,7 @@ function mouseClick(id){
 
 function fireRound(player){
     //ensures a player can't fire when it is not their turn
-    if(player!=turn){
+    if(player!=turn||target==undefined){
         return;
     }
     //Gives string for Display Array and coordinates
@@ -112,6 +112,10 @@ function fireRound(player){
         }
         target = undefined;
     }
+    if(checkWin(player)){
+        //Handle win condition
+        console.log(player + " won");
+    }
     //Switches turns after a successful fire
     switch (turn) {
         case 1:
@@ -122,7 +126,6 @@ function fireRound(player){
             break;
     }
     console.log("fired " + player);
-    //player1display_0a
 }
 
 function checkWin(player){
