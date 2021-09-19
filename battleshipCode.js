@@ -1,4 +1,4 @@
-var turn=0;
+var turn=1;
 var target;
 var player1TargetArray;
 var player2TargetArray;
@@ -66,8 +66,53 @@ function mouseClick(id){
 }
 
 function fireRound(player){
-console.log("fired " + player);
-$("#player1display_0a").css("background-color", "red")
+    //ensures a player can't fire when it is not their turn
+    if(player!=turn){
+        return;
+    }
+    //Gives string for Display Array and coordinates
+    let displayLocation = target.substring(0,7) + "display" + target.substring(7);
+    //Adjusts display and target array depending on hit or not
+    if(turn==1){
+        if(player1DisplayArray[getXCoordinate(target)][getYCoordinate(target)]=="Empty"){
+            $("#"+displayLocation).css("background-color", "grey")
+            $("#"+target).css("background-color", "grey")
+            player1DisplayArray[getXCoordinate(target)][getYCoordinate(target)] = "Miss"
+            player1TargetArray[getXCoordinate(target)][getYCoordinate(target)] = "Miss"
+        }
+        else{
+            $("#"+displayLocation).css("background-color", "red")
+            $("#"+target).css("background-color", "red")
+            player1DisplayArray[getXCoordinate(target)][getYCoordinate(target)] = "Hit"
+            player1TargetArray[getXCoordinate(target)][getYCoordinate(target)] = "Hit"
+        } 
+        target = undefined;
+    }
+    else{
+        if(player2DisplayArray[getXCoordinate(target)][getYCoordinate(target)]=="Empty"){
+            $("#"+displayLocation).css("background-color", "grey")
+            $("#"+target).css("background-color", "grey")
+            player2DisplayArray[getXCoordinate(target)][getYCoordinate(target)] = "Miss"
+            player2TargetArray[getXCoordinate(target)][getYCoordinate(target)] = "Miss"
+        }
+        else{
+            $("#"+displayLocation).css("background-color", "red")
+            $("#"+target).css("background-color", "red")
+            player2DisplayArray[getXCoordinate(target)][getYCoordinate(target)] = "Hit"
+            player2TargetArray[getXCoordinate(target)][getYCoordinate(target)] = "Hit"
+        }    
+        target = undefined;
+    }
+    //Switches turns after a successful fire
+    switch (turn) {
+        case 1:
+            turn = 2;
+            break;
+        case 2:
+            turn = 1;
+            break;
+    }
+    console.log("fired " + player);
 }
 
 $(document).ready(function(){
