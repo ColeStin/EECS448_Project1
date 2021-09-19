@@ -117,7 +117,7 @@ function betweenTurns(){
         $("#player2Area").addClass("d-none");
         $("#startNextTurn").removeClass('d-none');
     }, 2000)
-    
+
 }
 
 function startNextTurn(){
@@ -128,7 +128,7 @@ function startNextTurn(){
     else{
         player2Turn();
     }
-    
+
 }
 
 function endPlayer1StartPhase(){
@@ -144,7 +144,7 @@ function endPlayer2StartPhase(){
     $("#player2FinishStart").addClass("d-none");
     $("#player2Finish").removeClass('d-none');
     betweenTurns();
-    
+
 }
 
 
@@ -157,7 +157,7 @@ function player1Turn(){
     $("#player1Fire").removeClass("d-none");
     $("#player1TargetBox").removeClass("d-none");
     $("#player1Fire").prop("disabled", true);
-    
+
 }
 
 function player2Turn(){
@@ -223,6 +223,7 @@ function fireRound(player){
     }
     if(checkWin(player)){
         //Handle win condition
+        alert("PLAYER " + player + " WON!")
         console.log(player + " won");
     }
     //Switches turns after a successful fire
