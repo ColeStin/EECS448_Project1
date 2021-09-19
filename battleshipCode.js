@@ -213,261 +213,72 @@ function getValidPlacement(shipType, placeSpace){
     var x = getXCoordinate(placeSpace);
     var y = getYCoordinate(placeSpace);
     console.log(shipType.substring(1));
+    var shiplength;
     switch(shipType.substring(1)){
         case "Patrol":
-            for(i = 0; i<= getShipLength(shipType.substring(1)); i++){
-                if( shipType.substring(0,1) == 1){
-                    if(true){//get orintation and switch stuff
-                        if(player1DisplayArray[getXCoordinate(placeSpace)][getYCoordinate(placeSpace)+i] != "Empty")
-                         {
-                             console.log("IS NOT EMPTY");
-                             return false;
-                         }
-                    }
-                    else{
-                        if(player1DisplayArray[getXCoordinate(id)+i][getYCoordinate(id)] != "Empty")
-                         {
-                             return false;
-                         }
-                    }
-                }
-                else{
-                    if(true){//get orintation and switch stuff
-                        if(player2DisplayArray[getXCoordinate(placeSpace)][getYCoordinate(placeSpace)+i] != "Empty")
-                         {
-                             console.log("IS NOT EMPTY");
-                             return false;
-                         }
-                    }
-                    else{
-                        if(player2DisplayArray[getXCoordinate(id)+i][getYCoordinate(id)] != "Empty")
-                         {
-                             return false;
-                         }
-                    }
-                }
-                
-                
-            }
-            console.log("Assault Ship passes placement test");
-            return true;
+            shiplength = 1;
             break;
         case "Assault":
             //need to check orentation, just swap x and y in that case 
-            if(y<ysize-1){
-                console.log('here')
-                for(i = 0; i<= getShipLength(shipType.substring(1)); i++){
-                    console.log("loop");
-                    if( shipType.substring(0,1) == 1){
-                        if(true){//get orintation and switch stuff
-                            if(player1DisplayArray[getXCoordinate(placeSpace)][getYCoordinate(placeSpace)+i] != "Empty")
-                             {
-                                 console.log("IS NOT EMPTY");
-                                 return false;
-                             }
-                        }
-                        else{
-                            if(player1DisplayArray[getXCoordinate(id)+i][getYCoordinate(id)] != "Empty")
-                             {
-                                 return false;
-                             }
-                        }
-                    }
-                    else{
-                        if(true){//get orintation and switch stuff
-                            if(player2DisplayArray[getXCoordinate(placeSpace)][getYCoordinate(placeSpace)+i] != "Empty")
-                             {
-                                 console.log("IS NOT EMPTY");
-                                 return false;
-                             }
-                        }
-                        else{
-                            if(player2DisplayArray[getXCoordinate(id)+i][getYCoordinate(id)] != "Empty")
-                             {
-                                 return false;
-                             }
-                        }
-                    }
-                    
-                }
-                console.log("Assault Ship passes placement test");
-                return true;
-            }
-            else{
-                return false;
-            }
+            shiplength = 2;
             break;
         case "Sub":
-            if(y<ysize-2){
-                for(i = 0; i<= getShipLength(shipType.substring(1)); i++){
-                    if( shipType.substring(0,1) == 1){
-                        if(true){//get orintation and switch stuff
-                            if(player1DisplayArray[getXCoordinate(placeSpace)][getYCoordinate(placeSpace)+i] != "Empty")
-                             {
-                                 console.log("IS NOT EMPTY");
-                                 return false;
-                             }
-                        }
-                        else{
-                            if(player1DisplayArray[getXCoordinate(id)+i][getYCoordinate(id)] != "Empty")
-                             {
-                                 return false;
-                             }
-                        }
-                    }
-                    else{
-                        if(true){//get orintation and switch stuff
-                            if(player2DisplayArray[getXCoordinate(placeSpace)][getYCoordinate(placeSpace)+i] != "Empty")
-                             {
-                                 console.log("IS NOT EMPTY");
-                                 return false;
-                             }
-                        }
-                        else{
-                            if(player2DisplayArray[getXCoordinate(id)+i][getYCoordinate(id)] != "Empty")
-                             {
-                                 return false;
-                             }
-                        }
-                    }
-                    
-                }
-                console.log("Submarine passes placement test");
-                return true;
-            }
-            else{
-                return false;
-            }
+            shiplength = 3;
             break;
         case "Destroy":
-            if(y<ysize-3){
-                for(i = 0; i<= getShipLength(shipType.substring(1)); i++){
-                    if( shipType.substring(0,1) == 1){
-                        if(true){//get orintation and switch stuff
-                            if(player1DisplayArray[getXCoordinate(placeSpace)][getYCoordinate(placeSpace)+i] != "Empty")
-                             {
-                                 console.log("IS NOT EMPTY");
-                                 return false;
-                             }
-                        }
-                        else{
-                            if(player1DisplayArray[getXCoordinate(id)+i][getYCoordinate(id)] != "Empty")
-                             {
-                                 return false;
-                             }
-                        }
-                    }
-                    else{
-                        if(true){//get orintation and switch stuff
-                            if(player2DisplayArray[getXCoordinate(placeSpace)][getYCoordinate(placeSpace)+i] != "Empty")
-                             {
-                                 console.log("IS NOT EMPTY");
-                                 return false;
-                             }
-                        }
-                        else{
-                            if(player2DisplayArray[getXCoordinate(id)+i][getYCoordinate(id)] != "Empty")
-                             {
-                                 return false;
-                             }
-                        }
-                    }
-                    
-                }
-                console.log("Destroyer Ship passes placement test");
-                return true;
-            }
-            else{
-                return false;
-            }
+            shiplength = 4;
             break;
         case "Battle":
-            if(y<ysize-4){
-                for(i = 0; i<= getShipLength(shipType.substring(1)); i++){
-                    if( shipType.substring(0,1) == 1){
-                        if(true){//get orintation and switch stuff
-                            if(player1DisplayArray[getXCoordinate(placeSpace)][getYCoordinate(placeSpace)+i] != "Empty")
-                             {
-                                 console.log("IS NOT EMPTY");
-                                 return false;
-                             }
-                        }
-                        else{
-                            if(player1DisplayArray[getXCoordinate(id)+i][getYCoordinate(id)] != "Empty")
-                             {
-                                 return false;
-                             }
-                        }
-                    }
-                    else{
-                        if(true){//get orintation and switch stuff
-                            if(player2DisplayArray[getXCoordinate(placeSpace)][getYCoordinate(placeSpace)+i] != "Empty")
-                             {
-                                 console.log("IS NOT EMPTY");
-                                 return false;
-                             }
-                        }
-                        else{
-                            if(player2DisplayArray[getXCoordinate(id)+i][getYCoordinate(id)] != "Empty")
-                             {
-                                 return false;
-                             }
-                        }
-                    }
-                    
-                }
-                console.log("Battleship passes placement test");
-                return true;
-            }
-            else{
-                return false;
-            }
+            shiplength = 5;
             break;
         case "Carrier":
-            if(y<ysize-5){
-                for(i = 0; i<= getShipLength(shipType.substring(1)); i++){
-                    if( shipType.substring(0,1) == 1){
-                        if(true){//get orintation and switch stuff
-                            if(player1DisplayArray[getXCoordinate(placeSpace)][getYCoordinate(placeSpace)+i] != "Empty")
-                             {
-                                 console.log("IS NOT EMPTY");
-                                 return false;
-                             }
-                        }
-                        else{
-                            if(player1DisplayArray[getXCoordinate(id)+i][getYCoordinate(id)] != "Empty")
-                             {
-                                 return false;
-                             }
-                        }
-                    }
-                    else{
-                        if(true){//get orintation and switch stuff
-                            if(player2DisplayArray[getXCoordinate(placeSpace)][getYCoordinate(placeSpace)+i] != "Empty")
-                             {
-                                 console.log("IS NOT EMPTY");
-                                 return false;
-                             }
-                        }
-                        else{
-                            if(player2DisplayArray[getXCoordinate(id)+i][getYCoordinate(id)] != "Empty")
-                             {
-                                 return false;
-                             }
-                        }
-                    }
-                    
-                }
-                console.log("Aircraft Carrier passes placement test");
-                return true;
-            }
-            else{
-                return false;
-            }
+            
             break;
         default:
-            return true;
+            shiplength = 1;
     }
+    if(shiplength<=ysize-1){
+        console.log('here')
+        for(i = 0; i<= getShipLength(shipType.substring(1)); i++){
+            console.log("loop");
+            if( shipType.substring(0,1) == 1){
+                if(true){//get orintation and switch stuff
+                    if(player1DisplayArray[getXCoordinate(placeSpace)][getYCoordinate(placeSpace)+i] != "Empty")
+                     {
+                         console.log("IS NOT EMPTY");
+                         return false;
+                     }
+                }
+                else{
+                    if(player1DisplayArray[getXCoordinate(id)+i][getYCoordinate(id)] != "Empty")
+                     {
+                         return false;
+                     }
+                }
+            }
+            else{
+                if(true){//get orintation and switch stuff
+                    if(player2DisplayArray[getXCoordinate(placeSpace)][getYCoordinate(placeSpace)+i] != "Empty")
+                     {
+                         console.log("IS NOT EMPTY");
+                         return false;
+                     }
+                }
+                else{
+                    if(player2DisplayArray[getXCoordinate(id)+i][getYCoordinate(id)] != "Empty")
+                     {
+                         return false;
+                     }
+                }
+            }
+            
+        }
+        return true;
+    }
+    else{
+        return false;
+    }
+
 }
 
 
