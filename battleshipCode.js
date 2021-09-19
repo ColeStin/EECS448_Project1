@@ -1,4 +1,4 @@
-var turn=0;
+var turn=1;
 var target;
 var player1TargetArray;
 var player2TargetArray;
@@ -66,8 +66,83 @@ function mouseClick(id){
 }
 
 function fireRound(player){
-console.log("fired " + player);
-$("#1Assault-0").css("background-image", "url(target.png)")
+    //ensures a player can't fire when it is not their turn
+    if(player!=turn){
+        return;
+    }
+    //Gives string for Display Array and coordinates
+    let displayLocation;
+    if(player == 1){
+        displayLocation = target.substring(0,6) + "2display" + target.substring(7);
+    }
+    else if(player == 2){
+        displayLocation = target.substring(0,6) + "1display" + target.substring(7);
+    }
+    //Adjusts display and target array depending on hit or not
+    if(turn==1){
+        if(player2DisplayArray[getXCoordinate(target)][getYCoordinate(target)]=="Empty"){
+            $("#"+displayLocation).css("background-color", "grey")
+            $("#"+target).css("background-color", "grey")
+            player2DisplayArray[getXCoordinate(target)][getYCoordinate(target)] = "Miss"
+            player1TargetArray[getXCoordinate(target)][getYCoordinate(target)] = "Miss"
+        }
+        else{
+            $("#"+displayLocation).css("background-color", "red")
+            $("#"+target).css("background-color", "red")
+            player2DisplayArray[getXCoordinate(target)][getYCoordinate(target)] = "Hit"
+            player1TargetArray[getXCoordinate(target)][getYCoordinate(target)] = "Hit"
+        } 
+        target = undefined;
+    }
+    else{
+        if(player1DisplayArray[getXCoordinate(target)][getYCoordinate(target)]=="Empty"){
+            $("#"+displayLocation).css("background-color", "grey")
+            $("#"+target).css("background-color", "grey")
+            player1DisplayArray[getXCoordinate(target)][getYCoordinate(target)] = "Miss"
+            player2TargetArray[getXCoordinate(target)][getYCoordinate(target)] = "Miss"
+        }
+        else{
+            $("#"+displayLocation).css("background-color", "red")
+            $("#"+target).css("background-color", "red")
+            player1DisplayArray[getXCoordinate(target)][getYCoordinate(target)] = "Hit"
+            player2TargetArray[getXCoordinate(target)][getYCoordinate(target)] = "Hit"
+        }    
+        target = undefined;
+    }
+    //Switches turns after a successful fire
+    switch (turn) {
+        case 1:
+            turn = 2;
+            break;
+        case 2:
+            turn = 1;
+            break;
+    }
+    console.log("fired " + player);
+    //player1display_0a
+}
+
+function checkWin(player){
+    let flag = true;
+    if(player==1){
+        for(let x = 0;x<xsize;x++){
+            for(let y = 0;y<ysize;y++){
+                if(!(player2DisplayArray[x][y]=="Hit"||player2DisplayArray[x][y]=="Miss"||player2DisplayArray[x][y]=="Empty")){
+                    flag = false;
+                }
+            }
+        }
+    }
+    else{
+        for(let x = 0;x<xsize;x++){
+            for(let y = 0;y<ysize;y++){
+                if(!(player1DisplayArray[x][y]=="Hit"||player1DisplayArray[x][y]=="Miss"||player1DisplayArray[x][y]=="Empty")){
+                    flag = false;
+                }
+            }
+        }
+    }
+    return(flag);
 }
 
 $(document).ready(function(){
