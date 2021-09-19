@@ -71,34 +71,40 @@ function fireRound(player){
         return;
     }
     //Gives string for Display Array and coordinates
-    let displayLocation = target.substring(0,7) + "display" + target.substring(7);
+    let displayLocation;
+    if(player == 1){
+        displayLocation = target.substring(0,6) + "2display" + target.substring(7);
+    }
+    else if(player == 2){
+        displayLocation = target.substring(0,6) + "1display" + target.substring(7);
+    }
     //Adjusts display and target array depending on hit or not
     if(turn==1){
-        if(player1DisplayArray[getXCoordinate(target)][getYCoordinate(target)]=="Empty"){
+        if(player2DisplayArray[getXCoordinate(target)][getYCoordinate(target)]=="Empty"){
             $("#"+displayLocation).css("background-color", "grey")
             $("#"+target).css("background-color", "grey")
-            player1DisplayArray[getXCoordinate(target)][getYCoordinate(target)] = "Miss"
+            player2DisplayArray[getXCoordinate(target)][getYCoordinate(target)] = "Miss"
             player1TargetArray[getXCoordinate(target)][getYCoordinate(target)] = "Miss"
         }
         else{
             $("#"+displayLocation).css("background-color", "red")
             $("#"+target).css("background-color", "red")
-            player1DisplayArray[getXCoordinate(target)][getYCoordinate(target)] = "Hit"
+            player2DisplayArray[getXCoordinate(target)][getYCoordinate(target)] = "Hit"
             player1TargetArray[getXCoordinate(target)][getYCoordinate(target)] = "Hit"
         } 
         target = undefined;
     }
     else{
-        if(player2DisplayArray[getXCoordinate(target)][getYCoordinate(target)]=="Empty"){
+        if(player1DisplayArray[getXCoordinate(target)][getYCoordinate(target)]=="Empty"){
             $("#"+displayLocation).css("background-color", "grey")
             $("#"+target).css("background-color", "grey")
-            player2DisplayArray[getXCoordinate(target)][getYCoordinate(target)] = "Miss"
+            player1DisplayArray[getXCoordinate(target)][getYCoordinate(target)] = "Miss"
             player2TargetArray[getXCoordinate(target)][getYCoordinate(target)] = "Miss"
         }
         else{
             $("#"+displayLocation).css("background-color", "red")
             $("#"+target).css("background-color", "red")
-            player2DisplayArray[getXCoordinate(target)][getYCoordinate(target)] = "Hit"
+            player1DisplayArray[getXCoordinate(target)][getYCoordinate(target)] = "Hit"
             player2TargetArray[getXCoordinate(target)][getYCoordinate(target)] = "Hit"
         }    
         target = undefined;
@@ -113,6 +119,7 @@ function fireRound(player){
             break;
     }
     console.log("fired " + player);
+    //player1display_0a
 }
 
 $(document).ready(function(){
