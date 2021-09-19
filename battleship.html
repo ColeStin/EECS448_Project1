@@ -9,13 +9,18 @@
         <div class='container'>
             <div class='row'>
                 <div class='span4'></div>
+                <!-- Battleship image on the boat board will take up four boxes or columns-->
                     <div class='span4'><img class='center-block' src='battleship_logo.png' alt="Battleship!"></div>
                 <div class='span4'></div>
             </div>
         </div>
         <p>*How to play goes in this section*</p>
+        <!-- Displays the player's turn-->
+        <p style="color:red; font-size:30px"> player <span style="color:red; font-size:30px" id="playerturn"></span> turn</p>
+
         <div class = "text-center">
             <div class = "row">
+              <!-- Setting up of the Player1's(left player) gameboard-->
                 <div class='col-sm-6' id='player1Area' class='targetBox'>
                     <div class='row'>
                         <div class='targetBox'>
@@ -30,11 +35,15 @@
 
 
                     </div>
+
+                    <!-- Player1's(Left player) fire and rotate button-->
                     <div id='assistPlayer1'>
                         <button id='player1Fire' class='btn btn-secondary' style="align-items: center; justify-content: center; display: flex;" onclick="fireRound(1)">Fire!</button>
                         <button id='player1Rotate' class='btn btn-secondary' style="align-items: center; justify-content: center; display: flex; margin-top: 5px" onclick="rotateShips(1)">Rotate</button>
                     </div>
                 </div>
+
+                <!-- Setting up of the Player2's(Right player) gameboard-->
                 <div class='col-sm-6' id='player2Area' class='targetBox'>
                     <div class='row'>
                         <div class='targetBox'>
@@ -47,6 +56,8 @@
                         </div>
 
                     </div>
+
+                    <!-- Player2's(Right player) fire and rotate button-->
                     <div id='assistPlayer2'>
                         <button id='player2Fire' class='btn btn-secondary' style="align-items: center; justify-content: center; display: flex;" onclick="fireRound(2)">Fire!</button>
                         <button id='player2Rotate' class='btn btn-secondary' style="align-items: center; justify-content: center; display: flex; margin-top: 5px" onclick="rotateShips(2)">Rotate</button>
@@ -55,6 +66,7 @@
             </div>
         </div>
         <div class='row g-0'>
+          <!-- Player One(Left Player) boat pieces board-->
             <div class='col-sm-6 remove-padding'>
                 <div class='player-one-pieces container'>
                     <div class="battleships oneByShip oneXoneShip" draggable='true' id='1Patrol'>
@@ -131,6 +143,7 @@
 
                 </div>
             </div>
+            <!-- Player Two(Right Player) boat pieces board-->
             <div class='col-sm-6 remove-padding'>
                 <div class='player-two-pieces container'>
                     <div class="battleships oneByShip oneXoneShip" draggable='true' id='2Patrol'>
