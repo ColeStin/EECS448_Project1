@@ -4,7 +4,6 @@ var player1TargetArray;
 var player2TargetArray;
 var player1DisplayArray;
 var player2DisplayArray;
-var isPlacedArray;
 var xsize = 9;
 var ysize = 10;
 var isRotated = false;
@@ -92,6 +91,7 @@ $("#numberOfShips").change(function(){
     $("#startGame").removeClass("d-none");
 });
 
+//this function starts the game presumably after the amount of ships are selected
 function startGame(){
     $("#playArea").removeClass('d-none');
     $("#startingSection").addClass('d-none');
@@ -99,18 +99,21 @@ function startGame(){
 
 }
 
+//this function makes sure that all pieces are placed before enabling the finish turn in the start phase
 function checkPlayer1Pieces(){
     if(player1ShipsMoved.length == (numberOfShips)){
         $("#player1FinishStart").prop("disabled", false);
     }
 }
 
+//this function makes sure that all pieces are placed before enabling the finish turn in the start phase
 function checkPlayer2Pieces(){
     if(player2ShipsMoved.length == (numberOfShips)){
         $("#player2FinishStart").prop("disabled", false);
     }
 }
 
+//this is a function that hides everything in between turns so that users are able to hide thier moves
 function betweenTurns(){
     setTimeout(function(){
         $("#player1Area").addClass("d-none");
@@ -120,6 +123,7 @@ function betweenTurns(){
     
 }
 
+//this function is called whenever the "start next turn" button is pressed 
 function startNextTurn(){
     $("#startNextTurn").removeClass('d-none');
     if(turn%2 == 1){
@@ -519,11 +523,11 @@ function getSpace(id){
 }
 
 function player1ShipsAreaEmpty(){
-
+    
 }
 
 function player1ShipsAreaEmpty(){
-
+    
 }
 
   battleshipsArray.forEach(battleships => battleships.addEventListener('dragstart', dragStart))
@@ -566,52 +570,12 @@ function dragLeave() {
   console.log('dragLeave')
 }
 
-//assigns not placed value (0) for all spaces in isPlacedArray, placed value will be 1
-//in this array each space corresponds to a different ship, starting with player 1 and increasing by size of ship
-//ex: isPlacedArray[0] will be player 1 Patrol, isPlacedArray[11] will be player 2 Carrier
-isPlacedArray = [0,0,0,0,0,0,0,0,0,0,0,0];
 //this function will take in an event and an id
 //it will process where the ship is at and if it is a valid place to drop the ship.
 function dragDrop(ev, id) {
     ev.preventDefault();
     var typeOfShip = ev.dataTransfer.getData("id"); //gets type of ship to pass to valid placement function to check and see if it is a valid placement
     console.log("type of ship: "+ typeOfShip);
-    if(typeOfShip == "1Patrol") {
-      isPlacedArray[0] = 1;
-    }
-    if(typeOfShip == "1Assault") {
-      isPlacedArray[1] = 1;
-    }
-    if(typeOfShip == "1Sub") {
-      isPlacedArray[2] = 1;
-    }
-    if(typeOfShip == "1Destroy") {
-      isPlacedArray[3] = 1;
-    }
-    if(typeOfShip == "1Battle") {
-      isPlacedArray[4] = 1;
-    }
-    if(typeOfShip == "1Carrier") {
-      isPlacedArray[5] = 1;
-    }
-    if(typeOfShip == "2Patrol") {
-      isPlacedArray[6] = 1;
-    }
-    if(typeOfShip == "2Assault") {
-      isPlacedArray[7] = 1;
-    }
-    if(typeOfShip == "2Sub") {
-      isPlacedArray[8] = 1;
-    }
-    if(typeOfShip == "2Destroy") {
-      isPlacedArray[9] = 1;
-    }
-    if(typeOfShip == "2Battle") {
-      isPlacedArray[10] = 1;
-    }
-    if(typeOfShip == "2Carrier") {
-      isPlacedArray[11] = 1;
-    }
     if(getValidPlacement(typeOfShip, id)){
         //make sure to update arrays based on how long length of ship is and such, can hard code or do dynamic if needed
         ev.target.appendChild(document.getElementById(typeOfShip));
@@ -619,7 +583,7 @@ function dragDrop(ev, id) {
         console.log(typeOfShip)
         switch (id.substring(6,7)){
             case '1':
-
+                
                 for(i = 0; i<= getShipLength(typeOfShip.substring(1)); i++){
                     var shipConcant = typeOfShip+"-"+i;
                     if(!isRotated){//get orintation and switch stuff
@@ -660,83 +624,22 @@ function dragEnd() {
 }
 
 function rotateShips(player) {
-  console.log("rotating")
   if(isRotated == false) {
-    if(isPlacedArray[0] == 0){
-      $(".rotate1Patrol").css("transform", "rotate(.25turn)");
-    }
-    if(isPlacedArray[1] == 0){
-      $(".rotate1Assault").css("transform", "rotate(.25turn)");
-    }
-    if(isPlacedArray[2] == 0){
-      $(".rotate1Sub").css("transform", "rotate(.25turn)");
-    }
-    if(isPlacedArray[3] == 0){
-      $(".rotate1Destroy").css("transform", "rotate(.25turn)");
-    }
-    if(isPlacedArray[4] == 0){
-      $(".rotate1Battle").css("transform", "rotate(.25turn)");
-    }
-    if(isPlacedArray[5] == 0){
-      $(".rotate1Carrier").css("transform", "rotate(.25turn)");
-    }
-    if(isPlacedArray[6] == 0){
-      $(".rotate2Patrol").css("transform", "rotate(.25turn)");
-    }
-    if(isPlacedArray[7] == 0){
-      $(".rotate2Assault").css("transform", "rotate(.25turn)");
-    }
-    if(isPlacedArray[8] == 0){
-      $(".rotate2Sub").css("transform", "rotate(.25turn)");
-    }
-    if(isPlacedArray[9] == 0){
-      $(".rotate2Destroy").css("transform", "rotate(.25turn)");
-    }
-    if(isPlacedArray[10] == 0){
-      $(".rotate2Battle").css("transform", "rotate(.25turn)");
-    }
-    if(isPlacedArray[11] == 0){
-      $(".rotate2Carrier").css("transform", "rotate(.25turn)");
-    }
+    $(".oneXoneShip").css("transform", "rotate(.25turn)");
+    $(".twoXoneShip").css("transform", "rotate(.25turn)");
+    $(".threeXoneShip").css("transform", "rotate(.25turn)");
+    $(".fourXoneShip").css("transform", "rotate(.25turn)");
+    $(".fiveXoneShip").css("transform", "rotate(.25turn)");
+    $(".sixXoneShip").css("transform", "rotate(.25turn)");
     isRotated = true;
   }
   else {
-    if(isPlacedArray[0] == 0){
-      $(".rotate1Patrol").css("transform", "rotate(0turn)");
-    }
-    if(isPlacedArray[1] == 0){
-      $(".rotate1Assault").css("transform", "rotate(0turn)");
-    }
-    if(isPlacedArray[2] == 0){
-      $(".rotate1Sub").css("transform", "rotate(0turn)");
-    }
-    if(isPlacedArray[3] == 0){
-      $(".rotate1Destroy").css("transform", "rotate(0turn)");
-    }
-    if(isPlacedArray[4] == 0){
-      $(".rotate1Battle").css("transform", "rotate(0turn)");
-    }
-    if(isPlacedArray[5] == 0){
-      $(".rotate1Carrier").css("transform", "rotate(0turn)");
-    }
-    if(isPlacedArray[6] == 0){
-      $(".rotate2Patrol").css("transform", "rotate(0turn)");
-    }
-    if(isPlacedArray[7] == 0){
-      $(".rotate2Assault").css("transform", "rotate(0turn)");
-    }
-    if(isPlacedArray[8] == 0){
-      $(".rotate2Sub").css("transform", "rotate(0turn)");
-    }
-    if(isPlacedArray[9] == 0){
-      $(".rotate2Destroy").css("transform", "rotate(0turn)");
-    }
-    if(isPlacedArray[10] == 0){
-      $(".rotate2Battle").css("transform", "rotate(0turn)");
-    }
-    if(isPlacedArray[11] == 0){
-      $(".rotate2Carrier").css("transform", "rotate(0turn)");
-    }
+    $(".oneXoneShip").css("transform", "rotate(0turn)");
+    $(".twoXoneShip").css("transform", "rotate(0turn)");
+    $(".threeXoneShip").css("transform", "rotate(0turn)");
+    $(".fourXoneShip").css("transform", "rotate(0turn)");
+    $(".fiveXoneShip").css("transform", "rotate(0turn)");
+    $(".sixXoneShip").css("transform", "rotate(0turn)");
     isRotated = false;
   }
 }
