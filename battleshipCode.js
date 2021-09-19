@@ -110,20 +110,22 @@ function checkPlayer2Pieces(){
 
 
 function endPlayer1StartPhase(){
-
+    $("#player1pieces").addClass('d-none');
+    $("#")
 }
 
 function endPlayer1StartPhase(){
-    
+    $("#player1pieces").addClass('d-none');
 }
 
 
 function player1Turn(){
-
+    //shows the player 1 board and resets values for disabled buttons and such
+    $("#")
 }
 
 function player2Turn(){
-
+//shows player2 board and resets values for disabled buttons and such
 }
 
 
