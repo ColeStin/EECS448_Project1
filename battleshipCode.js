@@ -4,6 +4,7 @@ var player1TargetArray;
 var player2TargetArray;
 var player1DisplayArray;
 var player2DisplayArray;
+var isPlacedArray;
 var xsize = 9;
 var ysize = 10;
 var isRotated = false;
@@ -18,6 +19,15 @@ const sixXoneShip = document.querySelector('.sixXoneShip')
 const shipNameArray = ["Patrol", "Assault", "Sub", "Destroy", "Battle", "Carrier"];
 var player1ShipsMoved = [];
 var player2ShipsMoved = [];
+/**var shipsSunk = {
+"Patrol": false,
+"Assault": false,
+"Sub": false,
+"Destroy": false,
+"Battle": false,
+"Carrier": false}**/
+var shipsSankArray;
+
 
 
 
@@ -91,7 +101,6 @@ $("#numberOfShips").change(function(){
     $("#startGame").removeClass("d-none");
 });
 
-//this function starts the game presumably after the amount of ships are selected
 function startGame(){
     $("#playArea").removeClass('d-none');
     $("#startingSection").addClass('d-none');
@@ -99,21 +108,18 @@ function startGame(){
 
 }
 
-//this function makes sure that all pieces are placed before enabling the finish turn in the start phase
 function checkPlayer1Pieces(){
     if(player1ShipsMoved.length == (numberOfShips)){
         $("#player1FinishStart").prop("disabled", false);
     }
 }
 
-//this function makes sure that all pieces are placed before enabling the finish turn in the start phase
 function checkPlayer2Pieces(){
     if(player2ShipsMoved.length == (numberOfShips)){
         $("#player2FinishStart").prop("disabled", false);
     }
 }
 
-//this is a function that hides everything in between turns so that users are able to hide thier moves
 function betweenTurns(){
     setTimeout(function(){
         $("#player1Area").addClass("d-none");
@@ -123,7 +129,6 @@ function betweenTurns(){
 
 }
 
-//this function is called whenever the "start next turn" button is pressed 
 function startNextTurn(){
     $("#startNextTurn").removeClass('d-none');
     if(turn%2 == 1){
@@ -230,6 +235,7 @@ function fireRound(player){
         alert("PLAYER " + player + " WON!")
         console.log(player + " won");
     }
+    checkShipSank()
     //Switches turns after a successful fire
     switch (turn) {
         case 1:
@@ -295,12 +301,11 @@ function generatePlayer1Targeting(){
         $("#player1TargetArray").append(html);
         for(var y =0; y<ysize; y++){
             //creates an array for each row within the main target array,
-            player1TargetArray[y] = new Array(ysize);
+            player1TargetArray[x] = new Array(ysize);
             var letter = (y+10).toString(36); //uses letter for secondary number (incase it reaches over 10 with y size)
             //creates a div for a singluar box, and there are y many boxes within a row
             var innerHTML =`
             <div id='player1_`+x+letter+`' class='selectionBox' onmouseover="hoverOverId('player1_`+x+letter+`')" onmouseout="mouseOutOfBox('player1_`+x+letter+`')" onclick="mouseClick('player1_`+x+letter+`')">
-
             </div>
             `;
             $("#player1_row"+x).append(innerHTML);
@@ -323,11 +328,10 @@ function generatePlayer2Targeting(){
         </div>`
         $("#player2TargetArray").append(html);
         for(var y =0; y<ysize; y++){
-            player2TargetArray[y] = new Array(ysize);
+            player2TargetArray[x] = new Array(ysize);
             var letter = (y+10).toString(36);
             var innerHTML =`
             <div id='player2_`+x+letter+`' class='selectionBox' onmouseover="hoverOverId('player2_`+x+letter+`')" onmouseout="mouseOutOfBox('player2_`+x+letter+`')" onclick="mouseClick('player2_`+x+letter+`')">
-
             </div>
             `;
             $("#player2_row"+x).append(innerHTML);
@@ -359,11 +363,10 @@ function generatePlayer1Display(){
         </div>`
         $("#player1Display").append(html);
         for(var y =0; y<ysize; y++){
-            player1DisplayArray[y] = new Array(ysize);
+            player1DisplayArray[x] = new Array(ysize);
             var letter = (y+10).toString(36);
             var innerHTML =`
             <div id='player1display_`+x+letter+`' class='dropBoxShip' ondrop="dragDrop(event, 'player1display_`+x+letter+`')" ondragover="dragOver(event)">
-
             </div>
             `;
             $("#player1display_row"+x).append(innerHTML);
@@ -387,11 +390,10 @@ function generatePlayer2Display(){
         $("#player2Display").append(html);
         console.log("append row");
         for(var y =0; y<ysize; y++){
-            player2DisplayArray[y] = new Array(ysize);
+            player2DisplayArray[x] = new Array(ysize);
             var letter = (y+10).toString(36);
             var innerHTML =`
             <div id='player2display_`+x+letter+`' class='dropBoxShip' ondrop="dragDrop(event, 'player2display_`+x+letter+`')" ondragover="dragOver(event)">
-
             </div>
             `;
             $("#player2display_row"+x).append(innerHTML);
@@ -524,11 +526,11 @@ function getSpace(id){
 }
 
 function player1ShipsAreaEmpty(){
-    
+
 }
 
 function player1ShipsAreaEmpty(){
-    
+
 }
 
   battleshipsArray.forEach(battleships => battleships.addEventListener('dragstart', dragStart))
@@ -571,12 +573,52 @@ function dragLeave() {
   console.log('dragLeave')
 }
 
+//assigns not placed value (0) for all spaces in isPlacedArray, placed value will be 1
+//in this array each space corresponds to a different ship, starting with player 1 and increasing by size of ship
+//ex: isPlacedArray[0] will be player 1 Patrol, isPlacedArray[11] will be player 2 Carrier
+isPlacedArray = [0,0,0,0,0,0,0,0,0,0,0,0];
 //this function will take in an event and an id
 //it will process where the ship is at and if it is a valid place to drop the ship.
 function dragDrop(ev, id) {
     ev.preventDefault();
     var typeOfShip = ev.dataTransfer.getData("id"); //gets type of ship to pass to valid placement function to check and see if it is a valid placement
     console.log("type of ship: "+ typeOfShip);
+    if(typeOfShip == "1Patrol") {
+      isPlacedArray[0] = 1;
+    }
+    if(typeOfShip == "1Assault") {
+      isPlacedArray[1] = 1;
+    }
+    if(typeOfShip == "1Sub") {
+      isPlacedArray[2] = 1;
+    }
+    if(typeOfShip == "1Destroy") {
+      isPlacedArray[3] = 1;
+    }
+    if(typeOfShip == "1Battle") {
+      isPlacedArray[4] = 1;
+    }
+    if(typeOfShip == "1Carrier") {
+      isPlacedArray[5] = 1;
+    }
+    if(typeOfShip == "2Patrol") {
+      isPlacedArray[6] = 1;
+    }
+    if(typeOfShip == "2Assault") {
+      isPlacedArray[7] = 1;
+    }
+    if(typeOfShip == "2Sub") {
+      isPlacedArray[8] = 1;
+    }
+    if(typeOfShip == "2Destroy") {
+      isPlacedArray[9] = 1;
+    }
+    if(typeOfShip == "2Battle") {
+      isPlacedArray[10] = 1;
+    }
+    if(typeOfShip == "2Carrier") {
+      isPlacedArray[11] = 1;
+    }
     if(getValidPlacement(typeOfShip, id)){
         //make sure to update arrays based on how long length of ship is and such, can hard code or do dynamic if needed
         ev.target.appendChild(document.getElementById(typeOfShip));
@@ -584,7 +626,7 @@ function dragDrop(ev, id) {
         console.log(typeOfShip)
         switch (id.substring(6,7)){
             case '1':
-                
+
                 for(i = 0; i<= getShipLength(typeOfShip.substring(1)); i++){
                     var shipConcant = typeOfShip+"-"+i;
                     if(!isRotated){//get orintation and switch stuff
@@ -625,32 +667,123 @@ function dragEnd() {
 }
 
 function rotateShips(player) {
+  console.log("rotating")
   if(isRotated == false) {
-    $(".oneXoneShip").css("transform", "rotate(.25turn)");
-    $(".twoXoneShip").css("transform", "rotate(.25turn)");
-    $(".threeXoneShip").css("transform", "rotate(.25turn)");
-    $(".fourXoneShip").css("transform", "rotate(.25turn)");
-    $(".fiveXoneShip").css("transform", "rotate(.25turn)");
-    $(".sixXoneShip").css("transform", "rotate(.25turn)");
+    if(isPlacedArray[0] == 0){
+      $(".rotate1Patrol").css("transform", "rotate(.25turn)");
+    }
+    if(isPlacedArray[1] == 0){
+      $(".rotate1Assault").css("transform", "rotate(.25turn)");
+    }
+    if(isPlacedArray[2] == 0){
+      $(".rotate1Sub").css("transform", "rotate(.25turn)");
+    }
+    if(isPlacedArray[3] == 0){
+      $(".rotate1Destroy").css("transform", "rotate(.25turn)");
+    }
+    if(isPlacedArray[4] == 0){
+      $(".rotate1Battle").css("transform", "rotate(.25turn)");
+    }
+    if(isPlacedArray[5] == 0){
+      $(".rotate1Carrier").css("transform", "rotate(.25turn)");
+    }
+    if(isPlacedArray[6] == 0){
+      $(".rotate2Patrol").css("transform", "rotate(.25turn)");
+    }
+    if(isPlacedArray[7] == 0){
+      $(".rotate2Assault").css("transform", "rotate(.25turn)");
+    }
+    if(isPlacedArray[8] == 0){
+      $(".rotate2Sub").css("transform", "rotate(.25turn)");
+    }
+    if(isPlacedArray[9] == 0){
+      $(".rotate2Destroy").css("transform", "rotate(.25turn)");
+    }
+    if(isPlacedArray[10] == 0){
+      $(".rotate2Battle").css("transform", "rotate(.25turn)");
+    }
+    if(isPlacedArray[11] == 0){
+      $(".rotate2Carrier").css("transform", "rotate(.25turn)");
+    }
     isRotated = true;
   }
   else {
-    $(".oneXoneShip").css("transform", "rotate(0turn)");
-    $(".twoXoneShip").css("transform", "rotate(0turn)");
-    $(".threeXoneShip").css("transform", "rotate(0turn)");
-    $(".fourXoneShip").css("transform", "rotate(0turn)");
-    $(".fiveXoneShip").css("transform", "rotate(0turn)");
-    $(".sixXoneShip").css("transform", "rotate(0turn)");
+    if(isPlacedArray[0] == 0){
+      $(".rotate1Patrol").css("transform", "rotate(0turn)");
+    }
+    if(isPlacedArray[1] == 0){
+      $(".rotate1Assault").css("transform", "rotate(0turn)");
+    }
+    if(isPlacedArray[2] == 0){
+      $(".rotate1Sub").css("transform", "rotate(0turn)");
+    }
+    if(isPlacedArray[3] == 0){
+      $(".rotate1Destroy").css("transform", "rotate(0turn)");
+    }
+    if(isPlacedArray[4] == 0){
+      $(".rotate1Battle").css("transform", "rotate(0turn)");
+    }
+    if(isPlacedArray[5] == 0){
+      $(".rotate1Carrier").css("transform", "rotate(0turn)");
+    }
+    if(isPlacedArray[6] == 0){
+      $(".rotate2Patrol").css("transform", "rotate(0turn)");
+    }
+    if(isPlacedArray[7] == 0){
+      $(".rotate2Assault").css("transform", "rotate(0turn)");
+    }
+    if(isPlacedArray[8] == 0){
+      $(".rotate2Sub").css("transform", "rotate(0turn)");
+    }
+    if(isPlacedArray[9] == 0){
+      $(".rotate2Destroy").css("transform", "rotate(0turn)");
+    }
+    if(isPlacedArray[10] == 0){
+      $(".rotate2Battle").css("transform", "rotate(0turn)");
+    }
+    if(isPlacedArray[11] == 0){
+      $(".rotate2Carrier").css("transform", "rotate(0turn)");
+    }
     isRotated = false;
   }
 }
 
 function checkShipSank() {
-  for(x=0;x<xsize;x++){
-    for(y=0;y<ysize;y++){
-      return
+  var shipsSankArray = [0,0,0,0,0,0]
+  console.log(player1DisplayArray)
+  for(x=0;x<numberOfShips;x++){
+    if(turn == 2){
+      for(i=0;i<xsize;i++){
+        for(j=0;j<ysize;j++){
+          var string = String(player1DisplayArray[i][j])
+          var currentName = String(shipNameArray[x])
+          //console.log(string)
+          if(string.includes(currentName)){
+            console.log("p1 ship is present")
+            shipsSankArray[x] = 1
+          }
+        }
+      }
+    }
+    if(turn == 1){
+      for(i=0;i<xsize;i++){
+        for(j=0;j<ysize;j++){
+          var string = player2DisplayArray[i][j]
+          var currentName = shipNameArray[x]
+          //console.log(string)
+          if(string.includes(currentName)){
+            console.log("p2 ship is present")
+            shipsSankArray[x] = 1
+          }
+        }
+      }
+    }
+    if(shipsSankArray[x] == 0){
+
+      alert(shipNameArray[x] + " has been sank!")
     }
   }
+  //console.log(shipsSankArray)
 }
 
 //needed funcitons->
@@ -658,12 +791,10 @@ function checkShipSank() {
 fire function: takes in and updates array for whatever the target was for the player
 there needs to be a placement function for stuff, probably a modal to select settins and such at begining of the game
 function to check target array for specific player
-
 images needed->
 waves
 target
 all 6 ships
 battleship logo
 gray square for miss
-
 */
