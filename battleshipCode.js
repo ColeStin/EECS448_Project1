@@ -122,6 +122,29 @@ function fireRound(player){
     //player1display_0a
 }
 
+function checkWin(player){
+    let flag = true;
+    if(player==1){
+        for(let x = 0;x<xsize;x++){
+            for(let y = 0;y<ysize;y++){
+                if(!(player2DisplayArray[x][y]=="Hit"||player2DisplayArray[x][y]=="Miss"||player2DisplayArray[x][y]=="Empty")){
+                    flag = false;
+                }
+            }
+        }
+    }
+    else{
+        for(let x = 0;x<xsize;x++){
+            for(let y = 0;y<ysize;y++){
+                if(!(player1DisplayArray[x][y]=="Hit"||player1DisplayArray[x][y]=="Miss"||player1DisplayArray[x][y]=="Empty")){
+                    flag = false;
+                }
+            }
+        }
+    }
+    return(flag);
+}
+
 $(document).ready(function(){
 
     generatePlayer1Targeting();
