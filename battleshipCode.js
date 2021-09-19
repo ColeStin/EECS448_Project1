@@ -19,6 +19,15 @@ const sixXoneShip = document.querySelector('.sixXoneShip')
 const shipNameArray = ["Patrol", "Assault", "Sub", "Destroy", "Battle", "Carrier"];
 var player1ShipsMoved = [];
 var player2ShipsMoved = [];
+/**var shipsSunk = {
+"Patrol": false,
+"Assault": false,
+"Sub": false,
+"Destroy": false,
+"Battle": false,
+"Carrier": false}**/
+var shipsSankArray;
+
 
 
 
@@ -226,6 +235,7 @@ function fireRound(player){
         alert("PLAYER " + player + " WON!")
         console.log(player + " won");
     }
+    checkShipSank()
     //Switches turns after a successful fire
     switch (turn) {
         case 1:
@@ -291,7 +301,7 @@ function generatePlayer1Targeting(){
         $("#player1TargetArray").append(html);
         for(var y =0; y<ysize; y++){
             //creates an array for each row within the main target array,
-            player1TargetArray[y] = new Array(ysize);
+            player1TargetArray[x] = new Array(ysize);
             var letter = (y+10).toString(36); //uses letter for secondary number (incase it reaches over 10 with y size)
             //creates a div for a singluar box, and there are y many boxes within a row
             var innerHTML =`
@@ -319,7 +329,7 @@ function generatePlayer2Targeting(){
         </div>`
         $("#player2TargetArray").append(html);
         for(var y =0; y<ysize; y++){
-            player2TargetArray[y] = new Array(ysize);
+            player2TargetArray[x] = new Array(ysize);
             var letter = (y+10).toString(36);
             var innerHTML =`
             <div id='player2_`+x+letter+`' class='selectionBox' onmouseover="hoverOverId('player2_`+x+letter+`')" onmouseout="mouseOutOfBox('player2_`+x+letter+`')" onclick="mouseClick('player2_`+x+letter+`')">
@@ -355,7 +365,7 @@ function generatePlayer1Display(){
         </div>`
         $("#player1Display").append(html);
         for(var y =0; y<ysize; y++){
-            player1DisplayArray[y] = new Array(ysize);
+            player1DisplayArray[x] = new Array(ysize);
             var letter = (y+10).toString(36);
             var innerHTML =`
             <div id='player1display_`+x+letter+`' class='dropBoxShip' ondrop="dragDrop(event, 'player1display_`+x+letter+`')" ondragover="dragOver(event)">
@@ -383,7 +393,7 @@ function generatePlayer2Display(){
         $("#player2Display").append(html);
         console.log("append row");
         for(var y =0; y<ysize; y++){
-            player2DisplayArray[y] = new Array(ysize);
+            player2DisplayArray[x] = new Array(ysize);
             var letter = (y+10).toString(36);
             var innerHTML =`
             <div id='player2display_`+x+letter+`' class='dropBoxShip' ondrop="dragDrop(event, 'player2display_`+x+letter+`')" ondragover="dragOver(event)">
@@ -743,11 +753,41 @@ function rotateShips(player) {
 }
 
 function checkShipSank() {
-  for(x=0;x<xsize;x++){
-    for(y=0;y<ysize;y++){
-      return
+  var shipsSankArray = [0,0,0,0,0,0]
+  console.log(player1DisplayArray)
+  for(x=0;x<numberOfShips;x++){
+    if(turn == 2){
+      for(i=0;i<xsize;i++){
+        for(j=0;j<ysize;j++){
+          var string = String(player1DisplayArray[i][j])
+          var currentName = String(shipNameArray[x])
+          //console.log(string)
+          if(string.includes(currentName)){
+            console.log("p1 ship is present")
+            shipsSankArray[x] = 1
+          }
+        }
+      }
+    }
+    if(turn == 1){
+      for(i=0;i<xsize;i++){
+        for(j=0;j<ysize;j++){
+          var string = player2DisplayArray[i][j]
+          var currentName = shipNameArray[x]
+          //console.log(string)
+          if(string.includes(currentName)){
+            console.log("p2 ship is present")
+            shipsSankArray[x] = 1
+          }
+        }
+      }
+    }
+    if(shipsSankArray[x] == 0){
+
+      alert(shipNameArray[x] + " has been sank!")
     }
   }
+  //console.log(shipsSankArray)
 }
 
 //needed funcitons->
