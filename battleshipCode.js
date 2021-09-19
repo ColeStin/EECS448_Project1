@@ -277,7 +277,7 @@ function getValidPlacement(shipType, placeSpace){
             shiplength = 5;
             break;
         case "Carrier":
-            
+            shiplength = 6;
             break;
         default:
             shiplength = 1;
@@ -418,11 +418,14 @@ function dragDrop(ev, id) {
             case '1':
                 console.log("player 1")
                 for(i = 0; i<= getShipLength(typeOfShip.substring(1)); i++){
+                    var shipConcant = typeOfShip+"-"+i;
                     if(true){//get orintation and switch stuff
-                        player1DisplayArray[getXCoordinate(id)][getYCoordinate(id)+i] = typeOfShip.substring(1);
+                        //horizontal
+                        player1DisplayArray[getXCoordinate(id)][getYCoordinate(id)+i] = shipConcant;
                     }
                     else{
-                        player1DisplayArray[getXCoordinate(id)+i][getYCoordinate(id)] = typeOfShip.substring(1);
+                        //vertical
+                        player1DisplayArray[getXCoordinate(id)+i][getYCoordinate(id)] = shipConcant;
                     }
                     
                 }
@@ -431,10 +434,10 @@ function dragDrop(ev, id) {
             case '2':
                 for(i = 0; i<= getShipLength(typeOfShip.substring(1)); i++){
                     if(true){//get orintation and switch stuff
-                        player2DisplayArray[getXCoordinate(id)][getYCoordinate(id)+i] = typeOfShip.substring(1);
+                        player2DisplayArray[getXCoordinate(id)][getYCoordinate(id)+i] = shipConcant;
                     }
                     else{
-                        player2DisplayArray[getXCoordinate(id)+i][getYCoordinate(id)] = typeOfShip.substring(1);
+                        player2DisplayArray[getXCoordinate(id)+i][getYCoordinate(id)] = shipConcant;
                     }
                 }
                 console.log('player 2');
