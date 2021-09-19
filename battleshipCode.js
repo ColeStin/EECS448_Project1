@@ -6,6 +6,7 @@ var player1DisplayArray;
 var player2DisplayArray;
 var xsize = 9;
 var ysize = 10;
+var isRotated = false;
 const battleshipsArray = document.querySelectorAll('.battleships')
 const oneXoneShip = document.querySelector('.oneXoneShip')
 const twoXoneShip = document.querySelector('.twoXoneShip')
@@ -91,7 +92,7 @@ function fireRound(player){
             $("#"+target).css("background-color", "red")
             player2DisplayArray[getXCoordinate(target)][getYCoordinate(target)] = "Hit"
             player1TargetArray[getXCoordinate(target)][getYCoordinate(target)] = "Hit"
-        } 
+        }
         target = undefined;
     }
     else{
@@ -106,7 +107,7 @@ function fireRound(player){
             $("#"+target).css("background-color", "red")
             player1DisplayArray[getXCoordinate(target)][getYCoordinate(target)] = "Hit"
             player2TargetArray[getXCoordinate(target)][getYCoordinate(target)] = "Hit"
-        }    
+        }
         target = undefined;
     }
     //Switches turns after a successful fire
@@ -167,10 +168,10 @@ function generatePlayer1Targeting(){
         </div>`
         $("#player1TargetArray").append(html);
         for(var y =0; y<ysize; y++){
-            //creates an array for each row within the main target array, 
+            //creates an array for each row within the main target array,
             player1TargetArray[y] = new Array(ysize);
             var letter = (y+10).toString(36); //uses letter for secondary number (incase it reaches over 10 with y size)
-            //creates a div for a singluar box, and there are y many boxes within a row            
+            //creates a div for a singluar box, and there are y many boxes within a row
             var innerHTML =`
             <div id='player1_`+x+letter+`' class='selectionBox' onmouseover="hoverOverId('player1_`+x+letter+`')" onmouseout="mouseOutOfBox('player1_`+x+letter+`')" onclick="mouseClick('player1_`+x+letter+`')">
 
@@ -226,7 +227,7 @@ function generatePlayer1Display(){
     //creates an array
     player1DisplayArray = new Array(xsize);
     for(var x =0; x<xsize;x++){
-        //specifies a row for 
+        //specifies a row for
         var html = `
         <div id='player1display_row`+x+`' class='row' >
         </div>`
@@ -253,7 +254,7 @@ function generatePlayer1Display(){
 function generatePlayer2Display(){
     player2DisplayArray = new Array(xsize);
     for(var x =0; x<xsize;x++){
-        //specifies a row for 
+        //specifies a row for
         var html = `
         <div id='player2display_row`+x+`' class='row' >
         </div>`
@@ -294,7 +295,7 @@ function getValidPlacement(shipType, placeSpace){
             shiplength = 1;
             break;
         case "Assault":
-            //need to check orentation, just swap x and y in that case 
+            //need to check orentation, just swap x and y in that case
             shiplength = 2;
             break;
         case "Sub":
@@ -346,7 +347,7 @@ function getValidPlacement(shipType, placeSpace){
                      }
                 }
             }
-            
+
         }
         return true;
     }
@@ -405,7 +406,7 @@ function getSpace(id){
 let currentShipName
 let currentShip
 
-//this allows to know what type of ship is being grabbed and dragged so that we can process 
+//this allows to know what type of ship is being grabbed and dragged so that we can process
 //if the ship is out of bounds or if it has valid placement
 battleshipsArray.forEach(battleships => battleships.addEventListener('mousedown', (e) => {
   //tells us what ship the player is clicking and what tile of the ship
@@ -457,7 +458,7 @@ function dragDrop(ev, id) {
                         //vertical
                         player1DisplayArray[getXCoordinate(id)+i][getYCoordinate(id)] = shipConcant;
                     }
-                    
+
                 }
                 console.log(player1DisplayArray);
                 break;
@@ -474,12 +475,33 @@ function dragDrop(ev, id) {
                 break;
         }
     }
-    
+
   console.log('dragDrop')
 }
 
 function dragEnd() {
   console.log('dragEnd')
+}
+
+function rotateShips(player) {
+  if(isRotated == false) {
+    $(".oneXoneShip").css("transform", "rotate(.25turn)");
+    $(".twoXoneShip").css("transform", "rotate(.25turn)");
+    $(".threeXoneShip").css("transform", "rotate(.25turn)");
+    $(".fourXoneShip").css("transform", "rotate(.25turn)");
+    $(".fiveXoneShip").css("transform", "rotate(.25turn)");
+    $(".sixXoneShip").css("transform", "rotate(.25turn)");
+    isRotated = true;
+  }
+  else {
+    $(".oneXoneShip").css("transform", "rotate(0turn)");
+    $(".twoXoneShip").css("transform", "rotate(0turn)");
+    $(".threeXoneShip").css("transform", "rotate(0turn)");
+    $(".fourXoneShip").css("transform", "rotate(0turn)");
+    $(".fiveXoneShip").css("transform", "rotate(0turn)");
+    $(".sixXoneShip").css("transform", "rotate(0turn)");
+    isRotated = false;
+  }
 }
 
 //needed funcitons->
