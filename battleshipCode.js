@@ -7,6 +7,7 @@ var player2DisplayArray;
 var xsize = 9;
 var ysize = 10;
 var isRotated = false;
+var numberOfShips;
 const battleshipsArray = document.querySelectorAll('.battleships')
 const oneXoneShip = document.querySelector('.oneXoneShip')
 const twoXoneShip = document.querySelector('.twoXoneShip')
@@ -15,6 +16,8 @@ const fourXoneShip = document.querySelector('.fourXoneShip')
 const fiveXoneShip = document.querySelector('.fiveXoneShip')
 const sixXoneShip = document.querySelector('.sixXoneShip')
 const shipNameArray = ["Patrol", "Assault", "Sub", "Destroy", "Battle", "Carrier"];
+var player1ShipsMoved = [];
+var player2ShipsMoved = [];
 
 
 
@@ -67,6 +70,62 @@ function mouseClick(id){
     //if it is not empty for player1 or 2, then it will not allow for the space to be selected
 
 }
+
+$("#numberOfShips").change(function(){
+    numberOfShips = parseInt($('#numberOfShips option:selected').val());
+    console.log("Number of Ships: "+ numberOfShips);
+    for(i=0;i<6;i++)
+    {
+        if(i<numberOfShips){
+            //make ship area visible
+            $("#"+shipNameArray[i]+"Area1").removeClass("d-none");
+            $("#"+shipNameArray[i]+"Area2").removeClass("d-none");
+        }
+        else{
+            $("#"+shipNameArray[i]+"Area1").addClass("d-none");
+            $("#"+shipNameArray[i]+"Area2").addClass("d-none");
+        }
+    }
+    $("#startGame").removeClass("d-none");
+});
+
+function startGame(){
+    $("#playArea").removeClass('d-none');
+    $("#startingSection").addClass('d-none');
+    $("#player1Area").removeClass('d-none');
+
+}
+
+function checkPlayer1Pieces(){
+    if(player1ShipsMoved.length == (numberOfShips)){
+        $("#player1FinishStart").prop("disabled", false);
+    }
+}
+
+function checkPlayer2Pieces(){
+    if(player2ShipsMoved.length == (numberOfShips)){
+        $("#player2FinishStart").prop("disabled", false);
+    }
+}
+
+
+function endPlayer1StartPhase(){
+
+}
+
+function endPlayer1StartPhase(){
+    
+}
+
+
+function player1Turn(){
+
+}
+
+function player2Turn(){
+
+}
+
 
 function fireRound(player){
     //ensures a player can't fire when it is not their turn
@@ -154,6 +213,10 @@ $(document).ready(function(){
     generatePlayer2Targeting();
     generatePlayer1Display();
     generatePlayer2Display();
+    $("#playArea").addClass("d-none");
+    $("#startGame").addClass("d-none");
+    $("#player1Area").addClass('d-none');
+    $("#player2Area").addClass('d-none');
     //need to fill in the array with a bucnh of "empty" slots so the targeting knows, specifications: hit = red, miss = gray, empty = blue
     // hit is a specified to show that when fired, there was an enemy ship that was hit, miss is just a fire with a miss.
     console.log("ready")
@@ -399,6 +462,14 @@ function getSpace(id){
     }
 }
 
+function player1ShipsAreaEmpty(){
+    
+}
+
+function player1ShipsAreaEmpty(){
+    
+}
+
   battleshipsArray.forEach(battleships => battleships.addEventListener('dragstart', dragStart))
   // player1TargetArray.forEach(/**target object**/ => /**target object**/.addEventListener('dragstart', dragStart))
   // player1TargetArray.forEach(/**target object**/ => /**target object**/.addEventListener('dragover', dragOver))
@@ -452,7 +523,7 @@ function dragDrop(ev, id) {
         console.log(typeOfShip)
         switch (id.substring(6,7)){
             case '1':
-                console.log("player 1")
+                
                 for(i = 0; i<= getShipLength(typeOfShip.substring(1)); i++){
                     var shipConcant = typeOfShip+"-"+i;
                     if(!isRotated){//get orintation and switch stuff
@@ -466,6 +537,8 @@ function dragDrop(ev, id) {
 
                 }
                 console.log(player1DisplayArray);
+                player1ShipsMoved.push(typeOfShip.substring(1));
+                checkPlayer1Pieces();
                 break;
             case '2':
                 for(i = 0; i<= getShipLength(typeOfShip.substring(1)); i++){
@@ -476,7 +549,9 @@ function dragDrop(ev, id) {
                         player2DisplayArray[getXCoordinate(id)+i][getYCoordinate(id)] = shipConcant;
                     }
                 }
-                console.log('player 2');
+                player2ShipsMoved.push(typeOfShip.substring(1));
+                console.log(player2ShipsMoved)
+                checkPlayer2Pieces();
                 break;
         }
     }
