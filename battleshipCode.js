@@ -742,6 +742,14 @@ function rotateShips(player) {
   }
 }
 
+function checkShipSank() {
+  for(x=0;x<xsize;x++){
+    for(y=0;y<ysize;y++){
+      return
+    }
+  }
+}
+
 //needed funcitons->
 /*
 fire function: takes in and updates array for whatever the target was for the player
