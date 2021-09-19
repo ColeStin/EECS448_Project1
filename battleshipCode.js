@@ -17,6 +17,8 @@ const sixXoneShip = document.querySelector('.sixXoneShip')
 const shipNameArray = ["Patrol", "Assault", "Sub", "Destroy", "Battle", "Carrier"];
 
 
+
+
 //this function will change the border color of a box in the targeting area
 //the mouse is hovering over the box
 function hoverOverId(id){
@@ -311,37 +313,40 @@ function getValidPlacement(shipType, placeSpace){
             shiplength = 6;
             break;
         default:
-            shiplength = 1;
+            shiplength = 0;
     }
     if(shiplength<=ysize-1){
         console.log('here')
         for(i = 0; i<= getShipLength(shipType.substring(1)); i++){
             console.log("loop");
+            console.log("X: "+x)
+            console.log("Y: "+y)
             if( shipType.substring(0,1) == 1){
-                if(true){//get orintation and switch stuff
-                    if(player1DisplayArray[getXCoordinate(placeSpace)][getYCoordinate(placeSpace)+i] != "Empty")
+                if(!isRotated){//get orintation and switch stuff
+                    if(player1DisplayArray[x][y+i] != "Empty")
                      {
                          console.log("IS NOT EMPTY");
                          return false;
                      }
                 }
                 else{
-                    if(player1DisplayArray[getXCoordinate(id)+i][getYCoordinate(id)] != "Empty")
+                    console.log(typeof x+i)
+                    if(player1DisplayArray[x+i][y] != "Empty")
                      {
                          return false;
                      }
                 }
             }
             else{
-                if(true){//get orintation and switch stuff
-                    if(player2DisplayArray[getXCoordinate(placeSpace)][getYCoordinate(placeSpace)+i] != "Empty")
+                if(!isRotated){//get orintation and switch stuff
+                    if(player2DisplayArray[x][y+i] != "Empty")
                      {
                          console.log("IS NOT EMPTY");
                          return false;
                      }
                 }
                 else{
-                    if(player2DisplayArray[getXCoordinate(id)+i][getYCoordinate(id)] != "Empty")
+                    if(player2DisplayArray[x+i][y] != "Empty")
                      {
                          return false;
                      }
@@ -364,14 +369,14 @@ function getValidPlacement(shipType, placeSpace){
 function getXCoordinate(id){
     var underscore = id.indexOf("_") +1;
     var x = id.substring(underscore,underscore+1);
-    return x;
+    return parseInt(x);
 }
 //will take in an id and return the y coordinate based on where the _ is placed
 //will return a number
 function getYCoordinate(id){
     var underscore = id.indexOf("_") + 2;
     var y = (id.charCodeAt(underscore)-97);
-    return y;
+    return parseInt(y);
 
 }
 //returns length of ship based on what the id is from the actual block of ship
@@ -450,7 +455,7 @@ function dragDrop(ev, id) {
                 console.log("player 1")
                 for(i = 0; i<= getShipLength(typeOfShip.substring(1)); i++){
                     var shipConcant = typeOfShip+"-"+i;
-                    if(true){//get orintation and switch stuff
+                    if(!isRotated){//get orintation and switch stuff
                         //horizontal
                         player1DisplayArray[getXCoordinate(id)][getYCoordinate(id)+i] = shipConcant;
                     }
@@ -464,7 +469,7 @@ function dragDrop(ev, id) {
                 break;
             case '2':
                 for(i = 0; i<= getShipLength(typeOfShip.substring(1)); i++){
-                    if(true){//get orintation and switch stuff
+                    if(!isRotated){//get orintation and switch stuff
                         player2DisplayArray[getXCoordinate(id)][getYCoordinate(id)+i] = shipConcant;
                     }
                     else{
