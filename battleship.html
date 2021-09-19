@@ -25,7 +25,7 @@
                 <option value='6'>6 Ships</option>
             </select>
             <button id='startGame' class="btn btn-lg btn-primary" onclick="startGame()">Start Game!</button>
-            
+
         </div>
         <button id='startNextTurn' class='btn btn-primary d-none' onclick="startNextTurn()">Start Next Turn!</button>
         <div id='playArea'>
@@ -36,15 +36,15 @@
                         <div class='row'>
                             <div class='targetBox' id='player1TargetBox'>
                                 <div class='col-sm-12' id='player1TargetArray' >
-    
+
                                 </div>
                             </div>
                             <div class="shipBox container" id = "player1Display" >
-    
+
                             </div>
-    
-    
-    
+
+
+
                         </div>
                         <div id='assistPlayer1'>
                             <button id='player1Fire' class='btn btn-primary d-none' disabled='disabled' onclick="fireRound(1)">Fire!</button>
@@ -54,15 +54,15 @@
                         <div class='player-one-pieces container' id='player1pieces'>
                             <button id='player1Rotate' class='btn btn-secondary' style="align-items: center; justify-content: center; display: flex; margin: 5px" onclick="rotateShips(1)">Rotate</button>
                             <div id='PatrolArea1'>
-                                <div class="battleships oneByShip oneXoneShip" draggable='true' id='1Patrol'>
+                                <div class="battleships oneByShip oneXoneShip rotate1Patrol" draggable='true' id='1Patrol'>
                                     <div id="1Patrol-0" ondragstart="dragStart(event)"></div>
                                 </div>
                             </div>
-                            
+
                             <div class='box' id='AssaultArea1'>
                                 <div class='outer'>
                                     <div class='inner'>
-                                        <div class="battleships twoByShip twoXoneShip" draggable='true' id="1Assault">
+                                        <div class="battleships twoByShip twoXoneShip rotate1Assault" draggable='true' id="1Assault">
                                             <div class = 'inner' id="1Assault-0"></div>
                                             <div class = 'inner' id="1Assault-1"></div>
                                         </div>
@@ -72,34 +72,34 @@
                             <div class='box' id='SubArea1'>
                                 <div class='outer'>
                                     <div class="inner">
-                                        <div class="battleships threeByShip threeXoneShip" draggable='true' id="1Sub">
+                                        <div class="battleships threeByShip threeXoneShip rotate1Sub" draggable='true' id="1Sub">
                                             <div id="1Sub-0"></div>
                                             <div id="1Sub-1"></div>
                                             <div id="1Sub-2"></div>
                                         </div>
                                     </div>
-        
+
                                 </div>
                             </div>
-        
+
                             <div class='box' id='DestroyArea1'>
                                 <div class='outer'>
                                     <div class="inner">
-                                        <div class="battleships fourByShip fourXoneShip" draggable='true' id="1Destroy">
+                                        <div class="battleships fourByShip fourXoneShip rotate1Destroy" draggable='true' id="1Destroy">
                                             <div id="1Destroy-0"></div>
                                             <div id="1Destroy-1"></div>
                                             <div id="1Destroy-2"></div>
                                             <div id="1Destroy-3"></div>
                                         </div>
                                     </div>
-        
+
                                 </div>
                             </div>
-        
+
                             <div class='box' id='BattleArea1'>
                                 <div class='outer'>
                                     <div class="inner">
-                                        <div class="battleships fiveByShip fiveXoneShip" draggable='true' id="1Battle">
+                                        <div class="battleships fiveByShip fiveXoneShip rotate1Battle" draggable='true' id="1Battle">
                                             <div id="1Battle-0"></div>
                                             <div id="1Battle-1"></div>
                                             <div id="1Battle-2"></div>
@@ -107,14 +107,14 @@
                                             <div id="1Battle-4"></div>
                                         </div>
                                     </div>
-        
+
                                 </div>
                             </div>
-        
+
                             <div class='box' id='CarrierArea1'>
                                 <div class='outer'>
                                     <div class="inner">
-                                        <div class="battleships sixByShip sixXoneShip" draggable='true' id="1Carrier">
+                                        <div class="battleships sixByShip sixXoneShip rotate1Carrier" draggable='true' id="1Carrier">
                                             <div id="1Carrier-0"></div>
                                             <div id="1Carrier-1"></div>
                                             <div id="1Carrier-2"></div>
@@ -123,11 +123,11 @@
                                             <div id="1Carrier-5"></div>
                                         </div>
                                     </div>
-        
+
                                 </div>
                             </div>
-        
-        
+
+
                         </div>
                     </div>
                     <div class='col-sm-6' id='player2Area' class='targetBox'>
@@ -135,13 +135,13 @@
                         <div class='row'>
                             <div class='targetBox' id='player2TargetBox'>
                                 <div class='col-sm-12' id='player2TargetArray' >
-    
+
                                 </div>
                             </div>
                             <div class="shipBox container" id = "player2Display">
-    
+
                             </div>
-    
+
                         </div>
                         <div id='assistPlayer2'>
                             <button id='player2Fire' class='btn btn-primary d-none' disabled='disabled' onclick="fireRound(2)">Fire!</button>
@@ -151,15 +151,15 @@
                         <div class='player-two-pieces container' id='player2pieces'>
                             <button id='player2Rotate' class='btn btn-secondary' style="align-items: center; justify-content: center; display: flex; margin: 5px" onclick="rotateShips(2)">Rotate</button>
                             <div id='PatrolArea2'>
-                                <div class="battleships oneByShip oneXoneShip" draggable='true' id='2Patrol'>
+                                <div class="battleships oneByShip oneXoneShip rotate2Patrol" draggable='true' id='2Patrol'>
                                     <div id="2Patrol-0" ondragstart="dragStart(event)"></div>
                                 </div>
                             </div>
-                            
+
                             <div class='box' id='AssaultArea2'>
                                 <div class='outer'>
                                     <div class='inner'>
-                                        <div class="battleships twoByShip twoXoneShip" draggable='true' id="2Assault">
+                                        <div class="battleships twoByShip twoXoneShip rotate2Assault" draggable='true' id="2Assault">
                                             <div class = 'inner' id="2Assault-0"></div>
                                             <div class = 'inner' id="2Assault-1"></div>
                                         </div>
@@ -169,34 +169,34 @@
                             <div class='box' id='SubArea2'>
                                 <div class='outer'>
                                     <div class="inner">
-                                        <div class="battleships threeByShip threeXoneShip" draggable='true' id="2Sub">
+                                        <div class="battleships threeByShip threeXoneShip rotate2Sub" draggable='true' id="2Sub">
                                             <div id="2Sub-0"></div>
                                             <div id="2Sub-1"></div>
                                             <div id="2Sub-2"></div>
                                         </div>
                                     </div>
-        
+
                                 </div>
                             </div>
-        
+
                             <div class='box' id='DestroyArea2'>
                                 <div class='outer'>
                                     <div class="inner">
-                                        <div class="battleships fourByShip fourXoneShip" draggable='true' id="2Destroy">
+                                        <div class="battleships fourByShip fourXoneShip rotate2Destroy" draggable='true' id="2Destroy">
                                             <div id="2Destroy-0"></div>
                                             <div id="2Destroy-1"></div>
                                             <div id="2Destroy-2"></div>
                                             <div id="2Destroy-3"></div>
                                         </div>
                                     </div>
-        
+
                                 </div>
                             </div>
-        
+
                             <div class='box' id='BattleArea2'>
                                 <div class='outer'>
                                     <div class="inner">
-                                        <div class="battleships fiveByShip fiveXoneShip" draggable='true' id="2Battle">
+                                        <div class="battleships fiveByShip fiveXoneShip rotate2Battle" draggable='true' id="2Battle">
                                             <div id="2Battle-0"></div>
                                             <div id="2Battle-1"></div>
                                             <div id="2Battle-2"></div>
@@ -204,14 +204,14 @@
                                             <div id="2Battle-4"></div>
                                         </div>
                                     </div>
-        
+
                                 </div>
                             </div>
-        
+
                             <div class='box' id='CarrierArea2'>
                                 <div class='outer'>
                                     <div class="inner">
-                                        <div class="battleships sixByShip sixXoneShip" draggable='true' id="2Carrier">
+                                        <div class="battleships sixByShip sixXoneShip rotate2Carrier" draggable='true' id="2Carrier">
                                             <div id="2Carrier-0"></div>
                                             <div id="2Carrier-1"></div>
                                             <div id="2Carrier-2"></div>
@@ -220,7 +220,7 @@
                                             <div id="2Carrier-5"></div>
                                         </div>
                                     </div>
-        
+
                                 </div>
                             </div>
                         </div>
@@ -229,14 +229,14 @@
             </div>
             <div class='row g-0'>
                 <div class='col-sm-6 remove-padding'>
-                    
+
                 </div>
                 <div class='col-sm-6 remove-padding'>
-                    
+
                 </div>
             </div>
         </div>
-        
+
 
     </body>
 
