@@ -25,14 +25,16 @@
                 <option value='6'>6 Ships</option>
             </select>
             <button id='startGame' class="btn btn-lg btn-primary" onclick="startGame()">Start Game!</button>
+            
         </div>
-        
+        <button id='startNextTurn' class='btn btn-primary d-none' onclick="startNextTurn()">Start Next Turn!</button>
         <div id='playArea'>
             <div class = "text-center">
                 <div class = "row">
                     <div class='col-sm-6' id='player1Area' class='targetBox'>
+                        <h1>Player 1</h1>
                         <div class='row'>
-                            <div class='targetBox'>
+                            <div class='targetBox' id='player1TargetBox'>
                                 <div class='col-sm-12' id='player1TargetArray' >
     
                                 </div>
@@ -45,9 +47,9 @@
     
                         </div>
                         <div id='assistPlayer1'>
-                            <button id='player1Fire' class='btn btn-secondary' onclick="fireRound(1)">Fire!</button>
+                            <button id='player1Fire' class='btn btn-primary d-none' disabled='disabled' onclick="fireRound(1)">Fire!</button>
                             <button id='player1FinishStart' class='btn btn-secondary' disabled='disabled' onclick="endPlayer1StartPhase()">End Start Phase</button>
-                            <button id='player1Finish' class='btn btn-secondary d-none' disabled='disabled' onclick="">End Turn</button>
+                            <button id='player1Finish' class='btn btn-secondary d-none' disabled='disabled' onclick="betweenTurns()">End Turn</button>
                         </div>
                         <div class='player-one-pieces container' id='player1pieces'>
                             <button id='player1Rotate' class='btn btn-secondary' style="align-items: center; justify-content: center; display: flex; margin: 5px" onclick="rotateShips(1)">Rotate</button>
@@ -129,8 +131,9 @@
                         </div>
                     </div>
                     <div class='col-sm-6' id='player2Area' class='targetBox'>
+                        <h1>Player 2</h1>
                         <div class='row'>
-                            <div class='targetBox'>
+                            <div class='targetBox' id='player2TargetBox'>
                                 <div class='col-sm-12' id='player2TargetArray' >
     
                                 </div>
@@ -141,9 +144,9 @@
     
                         </div>
                         <div id='assistPlayer2'>
-                            <button id='player2Fire' class='btn btn-secondary' onclick="fireRound(2)">Fire!</button>
-                            <button id='player2FinishStart' class='btn btn-secondary' disabled='disabled' onclick="endPlayer1StartPhase()">End Turn</button>
-                            <button id='player2Finish' class='btn btn-secondary' disabled='disabled'>End Turn</button>
+                            <button id='player2Fire' class='btn btn-primary d-none' disabled='disabled' onclick="fireRound(2)">Fire!</button>
+                            <button id='player2FinishStart' class='btn btn-secondary' disabled='disabled' onclick="endPlayer2StartPhase()">End Start Phase</button>
+                            <button id='player2Finish' class='btn btn-secondary d-none' disabled='disabled' onclick="betweenTurns()">End Turn</button>
                         </div>
                         <div class='player-two-pieces container' id='player2pieces'>
                             <button id='player2Rotate' class='btn btn-secondary' style="align-items: center; justify-content: center; display: flex; margin: 5px" onclick="rotateShips(2)">Rotate</button>

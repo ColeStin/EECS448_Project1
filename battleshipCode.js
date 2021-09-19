@@ -40,6 +40,8 @@ function mouseClick(id){
     var posType = getSpace(id); //gets the space type, so empty or not valid
     $("#player1Fire").removeClass("btn-danger");
     $("#player2Fire").removeClass("btn-danger");
+    $("#player1Fire").prop('disabled', false);
+    $("#player2Fire").prop('disabled', false);
     if(posType == "empty_player1"){// if the selection is from the player 1 area
         console.log("previous target: "+ target);
         // $("#player1Fire").removeClass("btn-secondary");
@@ -108,28 +110,71 @@ function checkPlayer2Pieces(){
     }
 }
 
+function betweenTurns(){
+    setTimeout(function(){
+        $("#player1Area").addClass("d-none");
+        $("#player2Area").addClass("d-none");
+        $("#startNextTurn").removeClass('d-none');
+    }, 2000)
+    
+}
 
-function endPlayer1StartPhase(){
-    $("#player1pieces").addClass('d-none');
-    $("#")
+function startNextTurn(){
+    $("#startNextTurn").removeClass('d-none');
+    if(turn%2 == 1){
+        player1Turn();
+    }
+    else{
+        player2Turn();
+    }
+    
 }
 
 function endPlayer1StartPhase(){
     $("#player1pieces").addClass('d-none');
+    $("#player1FinishStart").addClass("d-none");
+    $("#player1Finish").removeClass('d-none');
+    $("#player1Area").addClass('d-none');
+    $("#player2Area").removeClass('d-none');
+}
+
+function endPlayer2StartPhase(){
+    $("#player2pieces").addClass('d-none');
+    $("#player2FinishStart").addClass("d-none");
+    $("#player2Finish").removeClass('d-none');
+    betweenTurns();
+    
 }
 
 
 function player1Turn(){
     //shows the player 1 board and resets values for disabled buttons and such
-    $("#")
+    $("#player1Finish").prop("disabled", true);
+    $("#player2Area").addClass('d-none');
+    $("#player1Area").removeClass('d-none');
+    $("#player1Fire").prop("disabled", true);
+    $("#player1Fire").removeClass("d-none");
+    $("#player1TargetBox").removeClass("d-none");
+    $("#player1Fire").prop("disabled", true);
+    
 }
 
 function player2Turn(){
 //shows player2 board and resets values for disabled buttons and such
+    $("#player2Finish").prop("disabled", true);
+    $("#player1Area").addClass('d-none');
+    $("#player2Area").removeClass('d-none');
+    $("#player2Fire").prop("disabled", true);
+    $("#player2Fire").removeClass("d-none");
+    $("#player2TargetBox").removeClass("d-none");
+    $("#player2Fire").prop("disabled", true);
 }
 
 
 function fireRound(player){
+    //disables both fire buttons so that the players cannot fire twice within a turn
+    $("#player1Fire").prop('disabled', true);
+    $("#player2Fire").prop('disabled', true);
     //ensures a player can't fire when it is not their turn
     if(player!=turn){
         return;
@@ -157,6 +202,7 @@ function fireRound(player){
             player1TargetArray[getXCoordinate(target)][getYCoordinate(target)] = "Hit"
         }
         target = undefined;
+        $("#player1Finish").prop("disabled", false);
     }
     else{
         if(player1DisplayArray[getXCoordinate(target)][getYCoordinate(target)]=="Empty"){
@@ -172,6 +218,7 @@ function fireRound(player){
             player2TargetArray[getXCoordinate(target)][getYCoordinate(target)] = "Hit"
         }
         target = undefined;
+        $("#player2Finish").prop("disabled", false);
     }
     //Switches turns after a successful fire
     switch (turn) {
@@ -182,6 +229,7 @@ function fireRound(player){
             turn = 1;
             break;
     }
+    //need to make end turn enabled
     console.log("fired " + player);
     //player1display_0a
 }
@@ -219,6 +267,8 @@ $(document).ready(function(){
     $("#startGame").addClass("d-none");
     $("#player1Area").addClass('d-none');
     $("#player2Area").addClass('d-none');
+    $("#player1TargetBox").addClass("d-none");
+    $("#player2TargetBox").addClass('d-none');
     //need to fill in the array with a bucnh of "empty" slots so the targeting knows, specifications: hit = red, miss = gray, empty = blue
     // hit is a specified to show that when fired, there was an enemy ship that was hit, miss is just a fire with a miss.
     console.log("ready")
