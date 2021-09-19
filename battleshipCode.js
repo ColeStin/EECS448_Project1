@@ -176,7 +176,7 @@ function fireRound(player){
     $("#player1Fire").prop('disabled', true);
     $("#player2Fire").prop('disabled', true);
     //ensures a player can't fire when it is not their turn
-    if(player!=turn){
+    if(player!=turn||target==undefined){
         return;
     }
     //Gives string for Display Array and coordinates
@@ -220,6 +220,10 @@ function fireRound(player){
         target = undefined;
         $("#player2Finish").prop("disabled", false);
     }
+    if(checkWin(player)){
+        //Handle win condition
+        console.log(player + " won");
+    }
     //Switches turns after a successful fire
     switch (turn) {
         case 1:
@@ -231,7 +235,6 @@ function fireRound(player){
     }
     //need to make end turn enabled
     console.log("fired " + player);
-    //player1display_0a
 }
 
 function checkWin(player){
