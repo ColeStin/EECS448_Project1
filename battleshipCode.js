@@ -240,9 +240,11 @@ function fireRound(player){
     switch (turn) {
         case 1:
             turn = 2;
+            $("#playerturn").html("2");
             break;
         case 2:
             turn = 1;
+            $("#playerturn").html("1");
             break;
     }
     //need to make end turn enabled
