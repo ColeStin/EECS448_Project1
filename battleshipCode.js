@@ -648,18 +648,22 @@ function dragDrop(ev, id) {
                 checkPlayer1Pieces();
                 break;
             case '2':
-                for(i = 0; i<= getShipLength(typeOfShip.substring(1)); i++){
-                    if(!isRotated){//get orintation and switch stuff
-                        player2DisplayArray[getXCoordinate(id)][getYCoordinate(id)+i] = shipConcant;
-                    }
-                    else{
-                        player2DisplayArray[getXCoordinate(id)+i][getYCoordinate(id)] = shipConcant;
-                    }
+            for(i = 0; i<= getShipLength(typeOfShip.substring(1)); i++){
+                var shipConcant = typeOfShip+"-"+i;
+                if(!isRotated){//get orintation and switch stuff
+                    //horizontal
+                    player2DisplayArray[getXCoordinate(id)][getYCoordinate(id)+i] = shipConcant;
                 }
-                player2ShipsMoved.push(typeOfShip.substring(1));
-                console.log(player2ShipsMoved)
-                checkPlayer2Pieces();
-                break;
+                else{
+                    //vertical
+                    player2DisplayArray[getXCoordinate(id)+i][getYCoordinate(id)] = shipConcant;
+                }
+
+            }
+            console.log(player2DisplayArray);
+            player2ShipsMoved.push(typeOfShip.substring(1));
+            checkPlayer2Pieces();
+            break;
         }
     }
 
@@ -752,39 +756,57 @@ function rotateShips(player) {
   }
 }
 
-function checkShipSank() {
-  var shipsSankArray = [0,0,0,0,0,0]
-  console.log(player1DisplayArray)
-  for(x=0;x<numberOfShips;x++){
-    if(turn == 2){
-      for(i=0;i<xsize;i++){
-        for(j=0;j<ysize;j++){
-          var string = String(player1DisplayArray[i][j])
-          var currentName = String(shipNameArray[x])
-          //console.log(string)
-          if(string.includes(currentName)){
-            console.log("p1 ship is present")
-            shipsSankArray[x] = 1
-          }
-        }
-      }
-    }
-    if(turn == 1){
-      for(i=0;i<xsize;i++){
-        for(j=0;j<ysize;j++){
-          var string = player2DisplayArray[i][j]
-          var currentName = shipNameArray[x]
-          //console.log(string)
-          if(string.includes(currentName)){
-            console.log("p2 ship is present")
-            shipsSankArray[x] = 1
-          }
-        }
-      }
-    }
-    if(shipsSankArray[x] == 0){
+var p1shipsSankArray = [0,0,0,0,0,0]
+var p2shipsSankArray = [0,0,0,0,0,0]
+var p1SankLoopCheck = [0,0,0,0,0,0]
+var p2SankLoopCheck = [0,0,0,0,0,0]
 
-      alert(shipNameArray[x] + " has been sank!")
+function checkShipSank() {
+  console.log(player2DisplayArray)
+  for(x=0;x<numberOfShips;x++){
+    p1shipsSankArray[x] = 0
+    p2shipsSankArray[x] = 0
+    if(p1shipsSankArray[x] == 0){
+      if(turn == 2){
+        for(i=0;i<xsize;i++){
+          for(j=0;j<ysize;j++){
+            var string = String(player1DisplayArray[i][j])
+            var currentName = String(shipNameArray[x])
+            //console.log(string)
+            if(string.includes(currentName)){
+              console.log("p1 ship is present")
+              p1shipsSankArray[x] = 1
+            }
+          }
+        }
+        if(p1SankLoopCheck[x] == 0){
+          if(p1shipsSankArray[x] == 0){
+            p1SankLoopCheck[x] = 1
+            alert(shipNameArray[x] + " has been sank!")
+          }
+        }
+      }
+    }
+    if(p2shipsSankArray[x] == 0){
+      if(turn == 1){
+        for(i=0;i<xsize;i++){
+          for(j=0;j<ysize;j++){
+            var string = String(player2DisplayArray[i][j])
+            var currentName = String(shipNameArray[x])
+            //console.log(string)
+            if(string.includes(currentName)){
+              console.log("p2 ship is present")
+              p2shipsSankArray[x] = 1
+            }
+          }
+        }
+        if(p1SankLoopCheck[x] == 0){
+          if(p2shipsSankArray[x] == 0){
+            p2SankLoopCheck[x] = 1
+            alert(shipNameArray[x] + " has been sank!")
+          }
+        }
+      }
     }
   }
   //console.log(shipsSankArray)
