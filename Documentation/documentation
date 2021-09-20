@@ -1,0 +1,221 @@
+
+/* @pre none
+ * @post changes the border color of a box(the one that the mouse is hovering over) in the targeting area
+ * @param id of the box that the cursor is hovering over
+ * @return none
+ **/
+ function hoverOverId(id)
+
+
+ /* @pre mouse should already be hovering over the box
+  * @post changes the border color if the mouse moves outside of the box
+  * @param id of the box on which the mouse is hovering over
+  * @return
+  **/
+  function mouseOutOfBox(id)
+
+
+  /* @pre None
+   * @post if the mouse is clicked over a box in the targeting area, this function will take its id
+   and see if it is a valid location to target
+   * @param id of the box over which the mouse is hovering
+   * @return none
+   **/
+   function mouseClick(id)
+
+
+   /* @pre None
+    * @post this function hides and shows various classes in order to start the game
+    * @param none
+    * @return none
+    **/
+    function startGame()
+
+
+    /* @pre None
+     * @post all the pieces(boats) for player1 are placed on board
+     * @param none
+     * @return none
+     **/
+     function checkPlayer1Pieces()
+
+
+     /* @pre None
+      * @post all the pieces(boats) for player2 are placed on board
+      * @param none
+      * @return None
+      **/
+      function checkPlayer2Pieces()
+
+
+      /* @pre None
+       * @post both players' boards are hidden for 2 sec so neither player cant see the pieces. Hence person will start the game manually as they are looking at the same board
+       * @param none
+       * @return None
+       **/
+       function betweenTurns()
+
+
+       /* @pre None
+        * @post This function will let the person manually start their turn
+        * @param none
+        * @return None
+        **/
+        function startNextTurn()
+
+
+        /* @pre None
+         * @post This method will hide the pieces(boats) section and show the target board. It will hide player 1 area and show player 2 area
+         * @param none
+         * @return None
+        **/
+        function endPlayer1StartPhase()
+
+
+       /* @pre None
+       * @post This method will show target board and hide the pieces board. Then actual game starts.
+       * @param none
+       * @return None
+       **/
+       function endPlayer2StartPhase()
+
+
+      /* @pre None
+       * @post This method shows the player 1 board and resets values for disabled buttons and such
+       * @param none
+       * @return None
+       **/
+       function player1Turn()
+
+
+      /* @pre None
+       * @post This method shows player2 board and resets values for disabled buttons and such
+       * @param none
+       * @return None
+       **/
+       function player2Turn()
+
+
+      /* @pre None
+       * @post This method disables both fire buttons so that the players cannot fire twice within a turn
+       * @param Current player whose turn it is to fire
+       * @return None
+       **/
+       function fireRound(player)
+
+
+
+      /* @pre None
+       * @post This method checks if the current player has won
+       * @param Current player who just fired
+       * @return None
+       **/
+       function checkWin(player)
+
+
+
+      /* @pre None
+       * @post This method is called to generate the player 1 targeting area, so it creates all the divs and boxes that can be interacted with when selecting your next target
+       * @param none
+       * @return None
+       **/
+       function generatePlayer1Targeting()
+
+
+
+      /* @pre None
+       * @post this function is a copy of the function above and generates targeting for player 2
+       * @param none
+       * @return None
+       **/
+       function generatePlayer2Targeting()
+
+
+
+      /* @pre None
+       * @post this method will create the display for player 1 to see where their ships are and where their opponent has fired and hit/missed
+       * @param none
+       * @return None
+       **/
+       function generatePlayer1Display()
+
+
+      /* @pre None
+       * @post this method will create the display for player 2 to see where their ships are and where their opponent has fired and hit/missed
+       * @param none
+       * @return None
+       **/
+       function generatePlayer2Display()
+
+
+
+     /* @pre None
+      * @post This method determines if the user can place a ship at the chosen position by checking if a ship is already there, or if the ship goes out of bounds
+      * @param ship type and placeSpace(where the user is attempting to place a ship)
+      * @return this method will return true or false as to see if the user can place a ship there
+      **/
+      function getValidPlacement(shipType, placeSpace)
+
+
+
+    /* @pre None
+     * @post This method will provide the x-coordinate of the selected position
+     * @param id of the position whose x-coordinate is needed
+     * @return a number(x-coordinate)
+     **/
+     function getXCoordinate(id)
+
+
+
+   /* @pre None
+    * @post This method will provide the y-coordinate of the selected position
+    * @param id of the position whose y-coordinate is needed
+    * @return a number(y-coordinate)
+    **/
+    function getYCoordinate(id)
+
+
+
+   /* @pre None
+    * @post This method provides the length of ship based on what the id is from the actual block of ship
+    * @param name of the ship
+    * @return length of the ship
+    **/
+    function getShipLength(name)
+
+   /* @pre None
+    * @post This method provides the type of space at the specified id(hit, miss, empty) on the player's target array
+    * @param id of the box selected with the mouse
+    * @return type of space at the id chosen
+    **/
+    function getSpace(id)
+
+   /* @pre None
+    * @post when the ship is starting to drag, the ship passes the event to this function and it will send an ID as data transfer when it is dropped
+    * @param drag event
+    * @return none
+    **/
+    function dragStart(ev)
+
+
+   /* @pre None
+    * @post This method will process where the ship is at and if it is a valid place to drop the ship.
+    * @param an event and an id
+    * @return none
+    **/
+    function dragDrop(ev, id)
+
+
+   /* @pre None
+   * @post This method will rotate all the ships within the pieces board
+   * @param current player
+   * @return None
+   **/
+   function rotateShips(player)
+
+  /* @pre None
+   * @post This method will check if the ship has sunk or not by the fire
+   * @param none
+   * @return None
+   **/
+   function checkShipSank()
