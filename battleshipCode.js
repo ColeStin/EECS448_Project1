@@ -192,11 +192,12 @@ function fireRound(player){
     //Gives string for Display Array and coordinates
     let displayLocation;
     if(player == 1){
-        displayLocation = target.substring(0,6) + "2display" + target.substring(7);
+        displayLocation = target.substring(0,6) + "2display_" + target.substring(8,10);
     }
     else if(player == 2){
-        displayLocation = target.substring(0,6) + "1display" + target.substring(7);
+        displayLocation = target.substring(0,6) + "1display_" + target.substring(8,10);
     }
+    console.log("Display Location: "+ displayLocation);
     //Adjusts display and target array depending on hit or not
     if(turn==1){
         if(player2DisplayArray[getXCoordinate(target)][getYCoordinate(target)]=="Empty"){
