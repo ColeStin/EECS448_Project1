@@ -61,21 +61,21 @@ function mouseClick(id){
             console.log("changing previous space");
             $("#"+target).css("background-color", "#ffffff00");
         }
-        console.log("setting target block: "+ id);
+        //console.log("setting target block: "+ id);
         target = id;
         $("#"+id).css("background-color", "orange");
 
     }
     //second except it is for player 2
     else if(posType == "empty_player2"){
-        console.log("previous target: "+ target);
+        //console.log("previous target: "+ target);
         // $("#player2Fire").removeClass("btn-secondary");
         $("#player2Fire").addClass("btn-danger");
         if(target != undefined){
             console.log("changing previous space");
             $("#"+target).css("background-color", "#ffffff00");
         }
-        console.log("setting target block: "+ id);
+        //console.log("setting target block: "+ id);
         target = id;
         $("#"+id).css("background-color", "orange");
     }
@@ -85,7 +85,7 @@ function mouseClick(id){
 
 $("#numberOfShips").change(function(){
     numberOfShips = parseInt($('#numberOfShips option:selected').val());
-    console.log("Number of Ships: "+ numberOfShips);
+    //console.log("Number of Ships: "+ numberOfShips);
     for(i=0;i<6;i++)
     {
         if(i<numberOfShips){
@@ -197,7 +197,7 @@ function fireRound(player){
     else if(player == 2){
         displayLocation = target.substring(0,6) + "1display_" + target.substring(8,10);
     }
-    console.log("Display Location: "+ displayLocation);
+    //console.log("Display Location: "+ displayLocation);
     //Adjusts display and target array depending on hit or not
     if(turn==1){
         if(player2DisplayArray[getXCoordinate(target)][getYCoordinate(target)]=="Empty"){
@@ -241,7 +241,7 @@ function fireRound(player){
     if(checkWin(player)){
         //Handle win condition
         alert("PLAYER " + player + " WON!")
-        console.log(player + " won");
+        //console.log(player + " won");
     }
     checkShipSank()
     //Switches turns after a successful fire
@@ -254,7 +254,7 @@ function fireRound(player){
             break;
     }
     //need to make end turn enabled
-    console.log("fired " + player);
+    //console.log("fired " + player);
 }
 
 function checkWin(player){
@@ -316,7 +316,7 @@ function generatePlayer1Targeting(){
             <div id='player1_`+x+letter+`' class='selectionBox' onmouseover="hoverOverId('player1_`+x+letter+`')" onmouseout="mouseOutOfBox('player1_`+x+letter+`')" onclick="mouseClick('player1_`+x+letter+`')">`+x+ letter+`
             </div>
             `;
-            console.log(innerHTML)
+            //console.log(innerHTML)
             $("#player1_row"+x).append(innerHTML);
         }
     }
@@ -386,7 +386,7 @@ function generatePlayer1Display(){
             player1DisplayArray[x][y] = "Empty";
         }
     }
-    console.log(player1DisplayArray);
+    //console.log(player1DisplayArray);
 }
 
 function generatePlayer2Display(){
@@ -397,7 +397,7 @@ function generatePlayer2Display(){
         <div id='player2display_row`+x+`' class='row' >
         </div>`
         $("#player2Display").append(html);
-        console.log("append row");
+        //console.log("append row");
         for(var y =0; y<ysize; y++){
             player2DisplayArray[x] = new Array(ysize);
             var letter = (y+10).toString(36);
@@ -413,7 +413,7 @@ function generatePlayer2Display(){
             player2DisplayArray[x][y] = "Empty";
         }
     }
-    console.log(player2DisplayArray);
+    //console.log(player2DisplayArray);
 
 }
 
@@ -422,10 +422,10 @@ function generatePlayer2Display(){
 //it will depend on if a ship is already there, or if the ship goes out of bounds
 function getValidPlacement(shipType, placeSpace){
     //checks array at location
-    console.log(shipType);
+    //console.log(shipType);
     var x = getXCoordinate(placeSpace);
     var y = getYCoordinate(placeSpace);
-    console.log(shipType.substring(1));
+    //console.log(shipType.substring(1));
     var shiplength;
     switch(shipType.substring(1)){
         case "Patrol":
@@ -451,21 +451,21 @@ function getValidPlacement(shipType, placeSpace){
             shiplength = 0;
     }
     if(shiplength<=ysize-1){
-        console.log('here')
+        //console.log('here')
         for(i = 0; i<= getShipLength(shipType.substring(1)); i++){
-            console.log("loop");
-            console.log("X: "+x)
-            console.log("Y: "+y)
+            // console.log("loop");
+            // console.log("X: "+x)
+            // console.log("Y: "+y)
             if( shipType.substring(0,1) == 1){
                 if(!isRotated){//get orintation and switch stuff
                     if(player1DisplayArray[x][y+i] != "Empty")
                      {
-                         console.log("IS NOT EMPTY");
+                         //console.log("IS NOT EMPTY");
                          return false;
                      }
                 }
                 else{
-                    console.log(typeof x+i)
+                    //console.log(typeof x+i)
                     if(player1DisplayArray[x+i][y] != "Empty")
                      {
                          return false;
@@ -476,7 +476,7 @@ function getValidPlacement(shipType, placeSpace){
                 if(!isRotated){//get orintation and switch stuff
                     if(player2DisplayArray[x][y+i] != "Empty")
                      {
-                         console.log("IS NOT EMPTY");
+                         //console.log("IS NOT EMPTY");
                          return false;
                      }
                 }
@@ -560,7 +560,7 @@ battleshipsArray.forEach(battleships => battleships.addEventListener('mousedown'
   //tells us what ship the player is clicking and what tile of the ship
   //ex: if the player is clicking the first tile of the fiveXoneShip it would return fiveXone-0
   currentShipName = e.target.id
-  console.log(currentShipName);
+  //console.log(currentShipName);
 }))
 
 //when the ship is starting to drag, the ship passes the event to this function and it will send an ID as data transfer when it is dropped
@@ -579,11 +579,11 @@ function dragOver(ev) {
 }
 
 function dragEnter() {
-  console.log('dragEnter')
+  //console.log('dragEnter')
 }
 
 function dragLeave() {
-  console.log('dragLeave')
+  //console.log('dragLeave')
 }
 
 //assigns not placed value (0) for all spaces in isPlacedArray, placed value will be 1
@@ -607,7 +607,7 @@ isPlacedDict = {
 function dragDrop(ev, id) {
     ev.preventDefault();
     var typeOfShip = ev.dataTransfer.getData("id"); //gets type of ship to pass to valid placement function to check and see if it is a valid placement
-    console.log("type of ship: "+ typeOfShip);
+    //console.log("type of ship: "+ typeOfShip);
     if(getValidPlacement(typeOfShip, id)){
       if(typeOfShip == "1Patrol") {
         isPlacedDict["1Patrol"] = 1;
@@ -660,7 +660,7 @@ function dragDrop(ev, id) {
         //make sure to update arrays based on how long length of ship is and such, can hard code or do dynamic if needed
         ev.target.appendChild(document.getElementById(typeOfShip));
         //update the display array
-        console.log(typeOfShip)
+        //console.log(typeOfShip)
         switch (id.substring(6,7)){
             case '1':
 
@@ -676,7 +676,7 @@ function dragDrop(ev, id) {
                     }
 
                 }
-                console.log(player1DisplayArray);
+                //console.log(player1DisplayArray);
                 player1ShipsMoved.push(typeOfShip.substring(1));
                 checkPlayer1Pieces();
                 break;
@@ -693,7 +693,7 @@ function dragDrop(ev, id) {
                 }
 
             }
-            console.log(player2DisplayArray);
+            //console.log(player2DisplayArray);
             player2ShipsMoved.push(typeOfShip.substring(1));
             checkPlayer2Pieces();
             break;
@@ -704,11 +704,11 @@ function dragDrop(ev, id) {
 }
 
 function dragEnd() {
-  console.log('dragEnd')
+  //console.log('dragEnd')
 }
 
 function rotateShips(player) {
-  console.log("rotating")
+  //console.log("rotating")
   if(isRotated == false) {
     if(isPlacedDict["1Patrol"] == 0){
       $(".rotate1Patrol").css("transform", "rotate(.25turn)");
@@ -795,7 +795,7 @@ var p1SankLoopCheck = [0,0,0,0,0,0]
 var p2SankLoopCheck = [0,0,0,0,0,0]
 
 function checkShipSank() {
-  console.log(player2DisplayArray)
+  //console.log(player2DisplayArray)
   for(x=0;x<numberOfShips;x++){
     p1shipsSankArray[x] = 0
     p2shipsSankArray[x] = 0
@@ -807,7 +807,7 @@ function checkShipSank() {
             var currentName = String(shipNameArray[x])
             //console.log(string)
             if(string.includes(currentName)){
-              console.log("p1 ship is present")
+              //console.log("p1 ship is present")
               p1shipsSankArray[x] = 1
             }
           }
@@ -828,7 +828,7 @@ function checkShipSank() {
             var currentName = String(shipNameArray[x])
             //console.log(string)
             if(string.includes(currentName)){
-              console.log("p2 ship is present")
+              //console.log("p2 ship is present")
               p2shipsSankArray[x] = 1
             }
           }
