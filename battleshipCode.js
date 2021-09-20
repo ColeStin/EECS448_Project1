@@ -557,7 +557,11 @@ battleshipsArray.forEach(battleships => battleships.addEventListener('mousedown'
 //when the ship is starting to drag, the ship passes the event to this function and it will send an ID as data transfer when it is dropped
 function dragStart(ev) {
   currentShipID = ev.srcElement.id;
-  ev.dataTransfer.setData("id", currentShipID);
+  for(i=0;i<12;i++){
+    if(isPlacedDict[currentShipID] == 0){
+      ev.dataTransfer.setData("id", currentShipID);
+    }
+  }
 }
 
 function dragOver(ev) {
@@ -576,50 +580,74 @@ function dragLeave() {
 //assigns not placed value (0) for all spaces in isPlacedArray, placed value will be 1
 //in this array each space corresponds to a different ship, starting with player 1 and increasing by size of ship
 //ex: isPlacedArray[0] will be player 1 Patrol, isPlacedArray[11] will be player 2 Carrier
-isPlacedArray = [0,0,0,0,0,0,0,0,0,0,0,0];
+isPlacedDict = {
+  "1Patrol": 0,
+  "1Assault": 0,
+  "1Sub": 0,
+  "1Destroy": 0,
+  "1Battle": 0,
+  "1Carrier": 0,
+  "2Patrol": 0,
+  "2Assault": 0,
+  "2Sub": 0,
+  "2Destroy": 0,
+  "2Battle": 0,
+  "2Carrier": 0}
 //this function will take in an event and an id
 //it will process where the ship is at and if it is a valid place to drop the ship.
 function dragDrop(ev, id) {
     ev.preventDefault();
     var typeOfShip = ev.dataTransfer.getData("id"); //gets type of ship to pass to valid placement function to check and see if it is a valid placement
     console.log("type of ship: "+ typeOfShip);
-    if(typeOfShip == "1Patrol") {
-      isPlacedArray[0] = 1;
-    }
-    if(typeOfShip == "1Assault") {
-      isPlacedArray[1] = 1;
-    }
-    if(typeOfShip == "1Sub") {
-      isPlacedArray[2] = 1;
-    }
-    if(typeOfShip == "1Destroy") {
-      isPlacedArray[3] = 1;
-    }
-    if(typeOfShip == "1Battle") {
-      isPlacedArray[4] = 1;
-    }
-    if(typeOfShip == "1Carrier") {
-      isPlacedArray[5] = 1;
-    }
-    if(typeOfShip == "2Patrol") {
-      isPlacedArray[6] = 1;
-    }
-    if(typeOfShip == "2Assault") {
-      isPlacedArray[7] = 1;
-    }
-    if(typeOfShip == "2Sub") {
-      isPlacedArray[8] = 1;
-    }
-    if(typeOfShip == "2Destroy") {
-      isPlacedArray[9] = 1;
-    }
-    if(typeOfShip == "2Battle") {
-      isPlacedArray[10] = 1;
-    }
-    if(typeOfShip == "2Carrier") {
-      isPlacedArray[11] = 1;
-    }
     if(getValidPlacement(typeOfShip, id)){
+      if(typeOfShip == "1Patrol") {
+        isPlacedDict["1Patrol"] = 1;
+        $("#1Patrol").prop("draggable", false)
+      }
+      if(typeOfShip == "1Assault") {
+        isPlacedDict["1Assault"] = 1;
+        $("#1Assault").prop("draggable", false)
+      }
+      if(typeOfShip == "1Sub") {
+        isPlacedDict["1Sub"] = 1;
+        $("#1Sub").prop("draggable", false)
+      }
+      if(typeOfShip == "1Destroy") {
+        isPlacedDict["1Destroy"] = 1;
+        $("#1Destroy").prop("draggable", false)
+      }
+      if(typeOfShip == "1Battle") {
+        isPlacedDict["1Battle"] = 1;
+        $("#1Battle").prop("draggable", false)
+      }
+      if(typeOfShip == "1Carrier") {
+        isPlacedDict["1Carrier"] = 1;
+        $("#1Carrier").prop("draggable", false)
+      }
+      if(typeOfShip == "2Patrol") {
+        isPlacedDict["2Patrol"] = 1;
+        $("#2Patrol").prop("draggable", false)
+      }
+      if(typeOfShip == "2Assault") {
+        isPlacedDict["2Assault"] = 1;
+        $("#2Assault").prop("draggable", false)
+      }
+      if(typeOfShip == "2Sub") {
+        isPlacedDict["2Sub"] = 1;
+        $("#2Sub").prop("draggable", false)
+      }
+      if(typeOfShip == "2Destroy") {
+        isPlacedDict["2Destroy"] = 1;
+        $("#2Destroy").prop("draggable", false)
+      }
+      if(typeOfShip == "2Battle") {
+        isPlacedDict["2Battle"] = 1;
+        $("#2Battle").prop("draggable", false)
+      }
+      if(typeOfShip == "2Carrier") {
+        isPlacedDict["2Carrier"] = 1;
+        $("#2Carrier").prop("draggable", false)
+      }
         //make sure to update arrays based on how long length of ship is and such, can hard code or do dynamic if needed
         ev.target.appendChild(document.getElementById(typeOfShip));
         //update the display array
@@ -673,79 +701,79 @@ function dragEnd() {
 function rotateShips(player) {
   console.log("rotating")
   if(isRotated == false) {
-    if(isPlacedArray[0] == 0){
+    if(isPlacedDict["1Patrol"] == 0){
       $(".rotate1Patrol").css("transform", "rotate(.25turn)");
     }
-    if(isPlacedArray[1] == 0){
+    if(isPlacedDict["1Assault"] == 0){
       $(".rotate1Assault").css("transform", "rotate(.25turn)");
     }
-    if(isPlacedArray[2] == 0){
+    if(isPlacedDict["1Sub"] == 0){
       $(".rotate1Sub").css("transform", "rotate(.25turn)");
     }
-    if(isPlacedArray[3] == 0){
+    if(isPlacedDict["1Destroy"] == 0){
       $(".rotate1Destroy").css("transform", "rotate(.25turn)");
     }
-    if(isPlacedArray[4] == 0){
+    if(isPlacedDict["1Battle"] == 0){
       $(".rotate1Battle").css("transform", "rotate(.25turn)");
     }
-    if(isPlacedArray[5] == 0){
+    if(isPlacedDict["1Carrier"] == 0){
       $(".rotate1Carrier").css("transform", "rotate(.25turn)");
     }
-    if(isPlacedArray[6] == 0){
+    if(isPlacedDict["2Patrol"] == 0){
       $(".rotate2Patrol").css("transform", "rotate(.25turn)");
     }
-    if(isPlacedArray[7] == 0){
+    if(isPlacedDict["2Assault"] == 0){
       $(".rotate2Assault").css("transform", "rotate(.25turn)");
     }
-    if(isPlacedArray[8] == 0){
+    if(isPlacedDict["2Sub"] == 0){
       $(".rotate2Sub").css("transform", "rotate(.25turn)");
     }
-    if(isPlacedArray[9] == 0){
+    if(isPlacedDict["2Destroy"] == 0){
       $(".rotate2Destroy").css("transform", "rotate(.25turn)");
     }
-    if(isPlacedArray[10] == 0){
+    if(isPlacedDict["2Battle"] == 0){
       $(".rotate2Battle").css("transform", "rotate(.25turn)");
     }
-    if(isPlacedArray[11] == 0){
+    if(isPlacedDict["2Carrier"] == 0){
       $(".rotate2Carrier").css("transform", "rotate(.25turn)");
     }
     isRotated = true;
   }
   else {
-    if(isPlacedArray[0] == 0){
+    if(isPlacedDict["1Patrol"] == 0){
       $(".rotate1Patrol").css("transform", "rotate(0turn)");
     }
-    if(isPlacedArray[1] == 0){
+    if(isPlacedDict["1Assault"] == 0){
       $(".rotate1Assault").css("transform", "rotate(0turn)");
     }
-    if(isPlacedArray[2] == 0){
+    if(isPlacedDict["1Sub"] == 0){
       $(".rotate1Sub").css("transform", "rotate(0turn)");
     }
-    if(isPlacedArray[3] == 0){
+    if(isPlacedDict["1Destroy"] == 0){
       $(".rotate1Destroy").css("transform", "rotate(0turn)");
     }
-    if(isPlacedArray[4] == 0){
+    if(isPlacedDict["1Battle"] == 0){
       $(".rotate1Battle").css("transform", "rotate(0turn)");
     }
-    if(isPlacedArray[5] == 0){
+    if(isPlacedDict["1Carrier"] == 0){
       $(".rotate1Carrier").css("transform", "rotate(0turn)");
     }
-    if(isPlacedArray[6] == 0){
+    if(isPlacedDict["2Patrol"] == 0){
       $(".rotate2Patrol").css("transform", "rotate(0turn)");
     }
-    if(isPlacedArray[7] == 0){
+    if(isPlacedDict["2Assault"] == 0){
       $(".rotate2Assault").css("transform", "rotate(0turn)");
     }
-    if(isPlacedArray[8] == 0){
+    if(isPlacedDict["2Sub"] == 0){
       $(".rotate2Sub").css("transform", "rotate(0turn)");
     }
-    if(isPlacedArray[9] == 0){
+    if(isPlacedDict["2Destroy"] == 0){
       $(".rotate2Destroy").css("transform", "rotate(0turn)");
     }
-    if(isPlacedArray[10] == 0){
+    if(isPlacedDict["2Battle"] == 0){
       $(".rotate2Battle").css("transform", "rotate(0turn)");
     }
-    if(isPlacedArray[11] == 0){
+    if(isPlacedDict["2Carrier"] == 0){
       $(".rotate2Carrier").css("transform", "rotate(0turn)");
     }
     isRotated = false;
