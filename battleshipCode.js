@@ -826,7 +826,7 @@ function checkShipSank() {
             }
           }
         }
-        if(p1SankLoopCheck[x] == 0){
+        if(p2SankLoopCheck[x] == 0){
           if(p2shipsSankArray[x] == 0){
             p2SankLoopCheck[x] = 1
             alert(shipNameArray[x] + " has been sank!")
