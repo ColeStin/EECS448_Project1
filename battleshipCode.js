@@ -305,9 +305,10 @@ function generatePlayer1Targeting(){
             var letter = (y+10).toString(36); //uses letter for secondary number (incase it reaches over 10 with y size)
             //creates a div for a singluar box, and there are y many boxes within a row
             var innerHTML =`
-            <div id='player1_`+x+letter+`' class='selectionBox' onmouseover="hoverOverId('player1_`+x+letter+`')" onmouseout="mouseOutOfBox('player1_`+x+letter+`')" onclick="mouseClick('player1_`+x+letter+`')">
+            <div id='player1_`+x+letter+`' class='selectionBox' onmouseover="hoverOverId('player1_`+x+letter+`')" onmouseout="mouseOutOfBox('player1_`+x+letter+`')" onclick="mouseClick('player1_`+x+letter+`')">`+x+ letter+`
             </div>
             `;
+            console.log(innerHTML)
             $("#player1_row"+x).append(innerHTML);
         }
     }
@@ -331,7 +332,7 @@ function generatePlayer2Targeting(){
             player2TargetArray[x] = new Array(ysize);
             var letter = (y+10).toString(36);
             var innerHTML =`
-            <div id='player2_`+x+letter+`' class='selectionBox' onmouseover="hoverOverId('player2_`+x+letter+`')" onmouseout="mouseOutOfBox('player2_`+x+letter+`')" onclick="mouseClick('player2_`+x+letter+`')">
+            <div id='player2_`+x+letter+`' class='selectionBox' onmouseover="hoverOverId('player2_`+x+letter+`')" onmouseout="mouseOutOfBox('player2_`+x+letter+`')" onclick="mouseClick('player2_`+x+letter+`')">`+x+ letter+`
             </div>
             `;
             $("#player2_row"+x).append(innerHTML);
