@@ -130,7 +130,7 @@ function betweenTurns(){
 }
 
 function startNextTurn(){
-    $("#startNextTurn").removeClass('d-none');
+    $("#startNextTurn").addClass('d-none');
     if(turn%2 == 1){
         player1Turn();
     }
@@ -208,6 +208,9 @@ function fireRound(player){
         }
         else{
             $("#"+displayLocation).css("background-color", "red")
+            if(player2DisplayArray[getXCoordinate(target)][getYCoordinate(target)].includes("0")){
+              $("#"+player2DisplayArray[getXCoordinate(target)][getYCoordinate(target)]).css("background-color", "red")
+            }
             $("#"+target).css("background-color", "red")
             player2DisplayArray[getXCoordinate(target)][getYCoordinate(target)] = "Hit"
             player1TargetArray[getXCoordinate(target)][getYCoordinate(target)] = "Hit"
@@ -224,6 +227,10 @@ function fireRound(player){
         }
         else{
             $("#"+displayLocation).css("background-color", "red")
+            if(player1DisplayArray[getXCoordinate(target)][getYCoordinate(target)].includes("0")){
+              $("#"+player1DisplayArray[getXCoordinate(target)][getYCoordinate(target)]).css("background-color", "red")
+            }
+            
             $("#"+target).css("background-color", "red")
             player1DisplayArray[getXCoordinate(target)][getYCoordinate(target)] = "Hit"
             player2TargetArray[getXCoordinate(target)][getYCoordinate(target)] = "Hit"
@@ -368,7 +375,7 @@ function generatePlayer1Display(){
             player1DisplayArray[x] = new Array(ysize);
             var letter = (y+10).toString(36);
             var innerHTML =`
-            <div id='player1display_`+x+letter+`' class='dropBoxShip' ondrop="dragDrop(event, 'player1display_`+x+letter+`')" ondragover="dragOver(event)">
+            <div id='player1display_`+x+letter+`' style='z-index:100;' class='dropBoxShip' ondrop="dragDrop(event, 'player1display_`+x+letter+`')" ondragover="dragOver(event)">
             </div>
             `;
             $("#player1display_row"+x).append(innerHTML);
@@ -395,7 +402,7 @@ function generatePlayer2Display(){
             player2DisplayArray[x] = new Array(ysize);
             var letter = (y+10).toString(36);
             var innerHTML =`
-            <div id='player2display_`+x+letter+`' class='dropBoxShip' ondrop="dragDrop(event, 'player2display_`+x+letter+`')" ondragover="dragOver(event)">
+            <div id='player2display_`+x+letter+`' style='z-index:100;' class='dropBoxShip' ondrop="dragDrop(event, 'player2display_`+x+letter+`')" ondragover="dragOver(event)">
             </div>
             `;
             $("#player2display_row"+x).append(innerHTML);
