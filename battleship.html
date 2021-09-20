@@ -50,15 +50,15 @@
 
 
                         </div>
-                        <div id='assistPlayer1'>
+                        <div id='assistPlayer1' style="float: left;">
                             <button id='player1Fire' class='btn btn-primary d-none' disabled='disabled' onclick="fireRound(1)">Fire!</button>
                             <button id='player1FinishStart' class='btn btn-secondary' disabled='disabled' onclick="endPlayer1StartPhase()">End Start Phase</button>
                             <button id='player1Finish' class='btn btn-secondary d-none' disabled='disabled' onclick="betweenTurns()">End Turn</button>
                         </div>
                         <div class='player-one-pieces container' id='player1pieces'>
-                            <button id='player1Rotate' class='btn btn-secondary' style="align-items: center; justify-content: center; display: flex; margin: 5px" onclick="rotateShips(1)">Rotate</button>
+                            <button id='player1Rotate' class='btn btn-secondary' style="align-items: center;  margin: 5px" onclick="rotateShips(1)">Rotate Ships</button>
                             <div id='PatrolArea1'>
-                                <div class="battleships oneByShip oneXoneShip rotate1Patrol" draggable='true' id='1Patrol'>
+                                <div class="battleships oneByShip oneXoneShip rotate1Patrol" style='z-index:1; position:relative' draggable='true' id='1Patrol'>
                                     <div id="1Patrol-0" ondragstart="dragStart(event)"></div>
                                 </div>
                             </div>
@@ -66,9 +66,9 @@
                             <div class='box' id='AssaultArea1'>
                                 <div class='outer'>
                                     <div class='inner'>
-                                        <div class="battleships twoByShip twoXoneShip rotate1Assault" draggable='true' id="1Assault">
-                                            <div class = 'inner' id="1Assault-0"></div>
-                                            <div class = 'inner' id="1Assault-1"></div>
+                                        <div class="battleships twoByShip twoXoneShip rotate1Assault" style='z-index:1' draggable='true' id="1Assault">
+                                            <div id="1Assault-0"></div>
+                                            <div id="1Assault-1"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -147,13 +147,13 @@
                             </div>
 
                         </div>
-                        <div id='assistPlayer2'>
+                        <div id='assistPlayer2' style="float: left;">
                             <button id='player2Fire' class='btn btn-primary d-none' disabled='disabled' onclick="fireRound(2)">Fire!</button>
                             <button id='player2FinishStart' class='btn btn-secondary' disabled='disabled' onclick="endPlayer2StartPhase()">End Start Phase</button>
                             <button id='player2Finish' class='btn btn-secondary d-none' disabled='disabled' onclick="betweenTurns()">End Turn</button>
                         </div>
                         <div class='player-two-pieces container' id='player2pieces'>
-                            <button id='player2Rotate' class='btn btn-secondary' style="align-items: center; justify-content: center; display: flex; margin: 5px" onclick="rotateShips(2)">Rotate</button>
+                            <button id='player2Rotate' class='btn btn-secondary' style="align-items: center;  margin: 5px" onclick="rotateShips(2)">Rotate Ships</button>
                             <div id='PatrolArea2'>
                                 <div class="battleships oneByShip oneXoneShip rotate2Patrol" draggable='true' id='2Patrol'>
                                     <div id="2Patrol-0" ondragstart="dragStart(event)"></div>
@@ -164,8 +164,8 @@
                                 <div class='outer'>
                                     <div class='inner'>
                                         <div class="battleships twoByShip twoXoneShip rotate2Assault" draggable='true' id="2Assault">
-                                            <div class = 'inner' id="2Assault-0"></div>
-                                            <div class = 'inner' id="2Assault-1"></div>
+                                            <div id="2Assault-0"></div>
+                                            <div id="2Assault-1"></div>
                                         </div>
                                     </div>
                                 </div>
