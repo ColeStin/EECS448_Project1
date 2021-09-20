@@ -61,21 +61,21 @@ function mouseClick(id){
             console.log("changing previous space");
             $("#"+target).css("background-color", "#ffffff00");
         }
-        console.log("setting target block: "+ id);
+        //console.log("setting target block: "+ id);
         target = id;
         $("#"+id).css("background-color", "orange");
 
     }
     //second except it is for player 2
     else if(posType == "empty_player2"){
-        console.log("previous target: "+ target);
+        //console.log("previous target: "+ target);
         // $("#player2Fire").removeClass("btn-secondary");
         $("#player2Fire").addClass("btn-danger");
         if(target != undefined){
             console.log("changing previous space");
             $("#"+target).css("background-color", "#ffffff00");
         }
-        console.log("setting target block: "+ id);
+        //console.log("setting target block: "+ id);
         target = id;
         $("#"+id).css("background-color", "orange");
     }
@@ -85,7 +85,7 @@ function mouseClick(id){
 
 $("#numberOfShips").change(function(){
     numberOfShips = parseInt($('#numberOfShips option:selected').val());
-    console.log("Number of Ships: "+ numberOfShips);
+    //console.log("Number of Ships: "+ numberOfShips);
     for(i=0;i<6;i++)
     {
         if(i<numberOfShips){
@@ -130,7 +130,7 @@ function betweenTurns(){
 }
 
 function startNextTurn(){
-    $("#startNextTurn").removeClass('d-none');
+    $("#startNextTurn").addClass('d-none');
     if(turn%2 == 1){
         player1Turn();
     }
@@ -192,11 +192,12 @@ function fireRound(player){
     //Gives string for Display Array and coordinates
     let displayLocation;
     if(player == 1){
-        displayLocation = target.substring(0,6) + "2display" + target.substring(7);
+        displayLocation = target.substring(0,6) + "2display_" + target.substring(8,10);
     }
     else if(player == 2){
-        displayLocation = target.substring(0,6) + "1display" + target.substring(7);
+        displayLocation = target.substring(0,6) + "1display_" + target.substring(8,10);
     }
+    //console.log("Display Location: "+ displayLocation);
     //Adjusts display and target array depending on hit or not
     if(turn==1){
         if(player2DisplayArray[getXCoordinate(target)][getYCoordinate(target)]=="Empty"){
@@ -207,6 +208,9 @@ function fireRound(player){
         }
         else{
             $("#"+displayLocation).css("background-color", "red")
+            if(player2DisplayArray[getXCoordinate(target)][getYCoordinate(target)].includes("0")){
+              $("#"+player2DisplayArray[getXCoordinate(target)][getYCoordinate(target)]).css("background-color", "red")
+            }
             $("#"+target).css("background-color", "red")
             player2DisplayArray[getXCoordinate(target)][getYCoordinate(target)] = "Hit"
             player1TargetArray[getXCoordinate(target)][getYCoordinate(target)] = "Hit"
@@ -223,6 +227,10 @@ function fireRound(player){
         }
         else{
             $("#"+displayLocation).css("background-color", "red")
+            if(player1DisplayArray[getXCoordinate(target)][getYCoordinate(target)].includes("0")){
+              $("#"+player1DisplayArray[getXCoordinate(target)][getYCoordinate(target)]).css("background-color", "red")
+            }
+            
             $("#"+target).css("background-color", "red")
             player1DisplayArray[getXCoordinate(target)][getYCoordinate(target)] = "Hit"
             player2TargetArray[getXCoordinate(target)][getYCoordinate(target)] = "Hit"
@@ -233,7 +241,7 @@ function fireRound(player){
     if(checkWin(player)){
         //Handle win condition
         alert("PLAYER " + player + " WON!")
-        console.log(player + " won");
+        //console.log(player + " won");
     }
     checkShipSank()
     //Switches turns after a successful fire
@@ -246,7 +254,7 @@ function fireRound(player){
             break;
     }
     //need to make end turn enabled
-    console.log("fired " + player);
+    //console.log("fired " + player);
 }
 
 function checkWin(player){
@@ -308,7 +316,7 @@ function generatePlayer1Targeting(){
             <div id='player1_`+x+letter+`' class='selectionBox' onmouseover="hoverOverId('player1_`+x+letter+`')" onmouseout="mouseOutOfBox('player1_`+x+letter+`')" onclick="mouseClick('player1_`+x+letter+`')">`+x+ letter+`
             </div>
             `;
-            console.log(innerHTML)
+            //console.log(innerHTML)
             $("#player1_row"+x).append(innerHTML);
         }
     }
@@ -367,7 +375,7 @@ function generatePlayer1Display(){
             player1DisplayArray[x] = new Array(ysize);
             var letter = (y+10).toString(36);
             var innerHTML =`
-            <div id='player1display_`+x+letter+`' class='dropBoxShip' ondrop="dragDrop(event, 'player1display_`+x+letter+`')" ondragover="dragOver(event)">
+            <div id='player1display_`+x+letter+`' style='z-index:100;' class='dropBoxShip' ondrop="dragDrop(event, 'player1display_`+x+letter+`')" ondragover="dragOver(event)">
             </div>
             `;
             $("#player1display_row"+x).append(innerHTML);
@@ -378,7 +386,7 @@ function generatePlayer1Display(){
             player1DisplayArray[x][y] = "Empty";
         }
     }
-    console.log(player1DisplayArray);
+    //console.log(player1DisplayArray);
 }
 
 function generatePlayer2Display(){
@@ -389,12 +397,12 @@ function generatePlayer2Display(){
         <div id='player2display_row`+x+`' class='row' >
         </div>`
         $("#player2Display").append(html);
-        console.log("append row");
+        //console.log("append row");
         for(var y =0; y<ysize; y++){
             player2DisplayArray[x] = new Array(ysize);
             var letter = (y+10).toString(36);
             var innerHTML =`
-            <div id='player2display_`+x+letter+`' class='dropBoxShip' ondrop="dragDrop(event, 'player2display_`+x+letter+`')" ondragover="dragOver(event)">
+            <div id='player2display_`+x+letter+`' style='z-index:100;' class='dropBoxShip' ondrop="dragDrop(event, 'player2display_`+x+letter+`')" ondragover="dragOver(event)">
             </div>
             `;
             $("#player2display_row"+x).append(innerHTML);
@@ -405,7 +413,7 @@ function generatePlayer2Display(){
             player2DisplayArray[x][y] = "Empty";
         }
     }
-    console.log(player2DisplayArray);
+    //console.log(player2DisplayArray);
 
 }
 
@@ -414,10 +422,10 @@ function generatePlayer2Display(){
 //it will depend on if a ship is already there, or if the ship goes out of bounds
 function getValidPlacement(shipType, placeSpace){
     //checks array at location
-    console.log(shipType);
+    //console.log(shipType);
     var x = getXCoordinate(placeSpace);
     var y = getYCoordinate(placeSpace);
-    console.log(shipType.substring(1));
+    //console.log(shipType.substring(1));
     var shiplength;
     switch(shipType.substring(1)){
         case "Patrol":
@@ -443,21 +451,21 @@ function getValidPlacement(shipType, placeSpace){
             shiplength = 0;
     }
     if(shiplength<=ysize-1){
-        console.log('here')
+        //console.log('here')
         for(i = 0; i<= getShipLength(shipType.substring(1)); i++){
-            console.log("loop");
-            console.log("X: "+x)
-            console.log("Y: "+y)
+            // console.log("loop");
+            // console.log("X: "+x)
+            // console.log("Y: "+y)
             if( shipType.substring(0,1) == 1){
                 if(!isRotated){//get orintation and switch stuff
                     if(player1DisplayArray[x][y+i] != "Empty")
                      {
-                         console.log("IS NOT EMPTY");
+                         //console.log("IS NOT EMPTY");
                          return false;
                      }
                 }
                 else{
-                    console.log(typeof x+i)
+                    //console.log(typeof x+i)
                     if(player1DisplayArray[x+i][y] != "Empty")
                      {
                          return false;
@@ -468,7 +476,7 @@ function getValidPlacement(shipType, placeSpace){
                 if(!isRotated){//get orintation and switch stuff
                     if(player2DisplayArray[x][y+i] != "Empty")
                      {
-                         console.log("IS NOT EMPTY");
+                         //console.log("IS NOT EMPTY");
                          return false;
                      }
                 }
@@ -552,13 +560,17 @@ battleshipsArray.forEach(battleships => battleships.addEventListener('mousedown'
   //tells us what ship the player is clicking and what tile of the ship
   //ex: if the player is clicking the first tile of the fiveXoneShip it would return fiveXone-0
   currentShipName = e.target.id
-  console.log(currentShipName);
+  //console.log(currentShipName);
 }))
 
 //when the ship is starting to drag, the ship passes the event to this function and it will send an ID as data transfer when it is dropped
 function dragStart(ev) {
   currentShipID = ev.srcElement.id;
-  ev.dataTransfer.setData("id", currentShipID);
+  for(i=0;i<12;i++){
+    if(isPlacedDict[currentShipID] == 0){
+      ev.dataTransfer.setData("id", currentShipID);
+    }
+  }
 }
 
 function dragOver(ev) {
@@ -567,64 +579,88 @@ function dragOver(ev) {
 }
 
 function dragEnter() {
-  console.log('dragEnter')
+  //console.log('dragEnter')
 }
 
 function dragLeave() {
-  console.log('dragLeave')
+  //console.log('dragLeave')
 }
 
 //assigns not placed value (0) for all spaces in isPlacedArray, placed value will be 1
 //in this array each space corresponds to a different ship, starting with player 1 and increasing by size of ship
 //ex: isPlacedArray[0] will be player 1 Patrol, isPlacedArray[11] will be player 2 Carrier
-isPlacedArray = [0,0,0,0,0,0,0,0,0,0,0,0];
+isPlacedDict = {
+  "1Patrol": 0,
+  "1Assault": 0,
+  "1Sub": 0,
+  "1Destroy": 0,
+  "1Battle": 0,
+  "1Carrier": 0,
+  "2Patrol": 0,
+  "2Assault": 0,
+  "2Sub": 0,
+  "2Destroy": 0,
+  "2Battle": 0,
+  "2Carrier": 0}
 //this function will take in an event and an id
 //it will process where the ship is at and if it is a valid place to drop the ship.
 function dragDrop(ev, id) {
     ev.preventDefault();
     var typeOfShip = ev.dataTransfer.getData("id"); //gets type of ship to pass to valid placement function to check and see if it is a valid placement
-    console.log("type of ship: "+ typeOfShip);
-    if(typeOfShip == "1Patrol") {
-      isPlacedArray[0] = 1;
-    }
-    if(typeOfShip == "1Assault") {
-      isPlacedArray[1] = 1;
-    }
-    if(typeOfShip == "1Sub") {
-      isPlacedArray[2] = 1;
-    }
-    if(typeOfShip == "1Destroy") {
-      isPlacedArray[3] = 1;
-    }
-    if(typeOfShip == "1Battle") {
-      isPlacedArray[4] = 1;
-    }
-    if(typeOfShip == "1Carrier") {
-      isPlacedArray[5] = 1;
-    }
-    if(typeOfShip == "2Patrol") {
-      isPlacedArray[6] = 1;
-    }
-    if(typeOfShip == "2Assault") {
-      isPlacedArray[7] = 1;
-    }
-    if(typeOfShip == "2Sub") {
-      isPlacedArray[8] = 1;
-    }
-    if(typeOfShip == "2Destroy") {
-      isPlacedArray[9] = 1;
-    }
-    if(typeOfShip == "2Battle") {
-      isPlacedArray[10] = 1;
-    }
-    if(typeOfShip == "2Carrier") {
-      isPlacedArray[11] = 1;
-    }
+    //console.log("type of ship: "+ typeOfShip);
     if(getValidPlacement(typeOfShip, id)){
+      if(typeOfShip == "1Patrol") {
+        isPlacedDict["1Patrol"] = 1;
+        $("#1Patrol").prop("draggable", false)
+      }
+      if(typeOfShip == "1Assault") {
+        isPlacedDict["1Assault"] = 1;
+        $("#1Assault").prop("draggable", false)
+      }
+      if(typeOfShip == "1Sub") {
+        isPlacedDict["1Sub"] = 1;
+        $("#1Sub").prop("draggable", false)
+      }
+      if(typeOfShip == "1Destroy") {
+        isPlacedDict["1Destroy"] = 1;
+        $("#1Destroy").prop("draggable", false)
+      }
+      if(typeOfShip == "1Battle") {
+        isPlacedDict["1Battle"] = 1;
+        $("#1Battle").prop("draggable", false)
+      }
+      if(typeOfShip == "1Carrier") {
+        isPlacedDict["1Carrier"] = 1;
+        $("#1Carrier").prop("draggable", false)
+      }
+      if(typeOfShip == "2Patrol") {
+        isPlacedDict["2Patrol"] = 1;
+        $("#2Patrol").prop("draggable", false)
+      }
+      if(typeOfShip == "2Assault") {
+        isPlacedDict["2Assault"] = 1;
+        $("#2Assault").prop("draggable", false)
+      }
+      if(typeOfShip == "2Sub") {
+        isPlacedDict["2Sub"] = 1;
+        $("#2Sub").prop("draggable", false)
+      }
+      if(typeOfShip == "2Destroy") {
+        isPlacedDict["2Destroy"] = 1;
+        $("#2Destroy").prop("draggable", false)
+      }
+      if(typeOfShip == "2Battle") {
+        isPlacedDict["2Battle"] = 1;
+        $("#2Battle").prop("draggable", false)
+      }
+      if(typeOfShip == "2Carrier") {
+        isPlacedDict["2Carrier"] = 1;
+        $("#2Carrier").prop("draggable", false)
+      }
         //make sure to update arrays based on how long length of ship is and such, can hard code or do dynamic if needed
         ev.target.appendChild(document.getElementById(typeOfShip));
         //update the display array
-        console.log(typeOfShip)
+        //console.log(typeOfShip)
         switch (id.substring(6,7)){
             case '1':
 
@@ -640,7 +676,7 @@ function dragDrop(ev, id) {
                     }
 
                 }
-                console.log(player1DisplayArray);
+                //console.log(player1DisplayArray);
                 player1ShipsMoved.push(typeOfShip.substring(1));
                 checkPlayer1Pieces();
                 break;
@@ -657,7 +693,7 @@ function dragDrop(ev, id) {
                 }
 
             }
-            console.log(player2DisplayArray);
+            //console.log(player2DisplayArray);
             player2ShipsMoved.push(typeOfShip.substring(1));
             checkPlayer2Pieces();
             break;
@@ -668,85 +704,85 @@ function dragDrop(ev, id) {
 }
 
 function dragEnd() {
-  console.log('dragEnd')
+  //console.log('dragEnd')
 }
 
 function rotateShips(player) {
-  console.log("rotating")
+  //console.log("rotating")
   if(isRotated == false) {
-    if(isPlacedArray[0] == 0){
+    if(isPlacedDict["1Patrol"] == 0){
       $(".rotate1Patrol").css("transform", "rotate(.25turn)");
     }
-    if(isPlacedArray[1] == 0){
+    if(isPlacedDict["1Assault"] == 0){
       $(".rotate1Assault").css("transform", "rotate(.25turn)");
     }
-    if(isPlacedArray[2] == 0){
+    if(isPlacedDict["1Sub"] == 0){
       $(".rotate1Sub").css("transform", "rotate(.25turn)");
     }
-    if(isPlacedArray[3] == 0){
+    if(isPlacedDict["1Destroy"] == 0){
       $(".rotate1Destroy").css("transform", "rotate(.25turn)");
     }
-    if(isPlacedArray[4] == 0){
+    if(isPlacedDict["1Battle"] == 0){
       $(".rotate1Battle").css("transform", "rotate(.25turn)");
     }
-    if(isPlacedArray[5] == 0){
+    if(isPlacedDict["1Carrier"] == 0){
       $(".rotate1Carrier").css("transform", "rotate(.25turn)");
     }
-    if(isPlacedArray[6] == 0){
+    if(isPlacedDict["2Patrol"] == 0){
       $(".rotate2Patrol").css("transform", "rotate(.25turn)");
     }
-    if(isPlacedArray[7] == 0){
+    if(isPlacedDict["2Assault"] == 0){
       $(".rotate2Assault").css("transform", "rotate(.25turn)");
     }
-    if(isPlacedArray[8] == 0){
+    if(isPlacedDict["2Sub"] == 0){
       $(".rotate2Sub").css("transform", "rotate(.25turn)");
     }
-    if(isPlacedArray[9] == 0){
+    if(isPlacedDict["2Destroy"] == 0){
       $(".rotate2Destroy").css("transform", "rotate(.25turn)");
     }
-    if(isPlacedArray[10] == 0){
+    if(isPlacedDict["2Battle"] == 0){
       $(".rotate2Battle").css("transform", "rotate(.25turn)");
     }
-    if(isPlacedArray[11] == 0){
+    if(isPlacedDict["2Carrier"] == 0){
       $(".rotate2Carrier").css("transform", "rotate(.25turn)");
     }
     isRotated = true;
   }
   else {
-    if(isPlacedArray[0] == 0){
+    if(isPlacedDict["1Patrol"] == 0){
       $(".rotate1Patrol").css("transform", "rotate(0turn)");
     }
-    if(isPlacedArray[1] == 0){
+    if(isPlacedDict["1Assault"] == 0){
       $(".rotate1Assault").css("transform", "rotate(0turn)");
     }
-    if(isPlacedArray[2] == 0){
+    if(isPlacedDict["1Sub"] == 0){
       $(".rotate1Sub").css("transform", "rotate(0turn)");
     }
-    if(isPlacedArray[3] == 0){
+    if(isPlacedDict["1Destroy"] == 0){
       $(".rotate1Destroy").css("transform", "rotate(0turn)");
     }
-    if(isPlacedArray[4] == 0){
+    if(isPlacedDict["1Battle"] == 0){
       $(".rotate1Battle").css("transform", "rotate(0turn)");
     }
-    if(isPlacedArray[5] == 0){
+    if(isPlacedDict["1Carrier"] == 0){
       $(".rotate1Carrier").css("transform", "rotate(0turn)");
     }
-    if(isPlacedArray[6] == 0){
+    if(isPlacedDict["2Patrol"] == 0){
       $(".rotate2Patrol").css("transform", "rotate(0turn)");
     }
-    if(isPlacedArray[7] == 0){
+    if(isPlacedDict["2Assault"] == 0){
       $(".rotate2Assault").css("transform", "rotate(0turn)");
     }
-    if(isPlacedArray[8] == 0){
+    if(isPlacedDict["2Sub"] == 0){
       $(".rotate2Sub").css("transform", "rotate(0turn)");
     }
-    if(isPlacedArray[9] == 0){
+    if(isPlacedDict["2Destroy"] == 0){
       $(".rotate2Destroy").css("transform", "rotate(0turn)");
     }
-    if(isPlacedArray[10] == 0){
+    if(isPlacedDict["2Battle"] == 0){
       $(".rotate2Battle").css("transform", "rotate(0turn)");
     }
-    if(isPlacedArray[11] == 0){
+    if(isPlacedDict["2Carrier"] == 0){
       $(".rotate2Carrier").css("transform", "rotate(0turn)");
     }
     isRotated = false;
@@ -759,7 +795,7 @@ var p1SankLoopCheck = [0,0,0,0,0,0]
 var p2SankLoopCheck = [0,0,0,0,0,0]
 
 function checkShipSank() {
-  console.log(player2DisplayArray)
+  //console.log(player2DisplayArray)
   for(x=0;x<numberOfShips;x++){
     p1shipsSankArray[x] = 0
     p2shipsSankArray[x] = 0
@@ -771,7 +807,7 @@ function checkShipSank() {
             var currentName = String(shipNameArray[x])
             //console.log(string)
             if(string.includes(currentName)){
-              console.log("p1 ship is present")
+              //console.log("p1 ship is present")
               p1shipsSankArray[x] = 1
             }
           }
@@ -792,12 +828,12 @@ function checkShipSank() {
             var currentName = String(shipNameArray[x])
             //console.log(string)
             if(string.includes(currentName)){
-              console.log("p2 ship is present")
+              //console.log("p2 ship is present")
               p2shipsSankArray[x] = 1
             }
           }
         }
-        if(p1SankLoopCheck[x] == 0){
+        if(p2SankLoopCheck[x] == 0){
           if(p2shipsSankArray[x] == 0){
             p2SankLoopCheck[x] = 1
             alert(shipNameArray[x] + " has been sank!")
