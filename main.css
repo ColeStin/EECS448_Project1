@@ -135,7 +135,7 @@
 
 
 .oneByShip{
-  background-image: url("topOfBattleship.png");
+  background-image: url("Patrol.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: auto;
@@ -143,7 +143,7 @@
   background-size: cover;
 }
 .twoByShip{
-  background-image: url("topOfBattleship.png");
+  background-image: url("Assault.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: auto;
@@ -151,7 +151,7 @@
   background-size: cover;
 }
 .threeByShip{
-  background-image: url("topOfBattleship.png");
+  background-image: url("Submarine.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: auto;
@@ -159,7 +159,7 @@
   background-size: cover;
 }
 .fourByShip{
-  background-image: url("topOfBattleship.png");
+  background-image: url("Destroyer.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: auto;
@@ -167,7 +167,7 @@
   background-size: cover;
 }
 .fiveByShip{
-  background-image: url("topOfBattleship.png");
+  background-image: url("Battleship.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: auto;
@@ -175,7 +175,7 @@
   background-size: cover;
 }
 .sixByShip{
-  background-image: url("topOfBattleship.png");
+  background-image: url("Carrier.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: auto;
